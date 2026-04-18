@@ -1,0 +1,49 @@
+---
+// src/components/TripHero.astro
+import { formatDateRange } from '../utils/format-date';
+
+interface Props {
+  title: string;
+  description: string;
+  cover_photo: string;
+  destinations: string[];
+  date_start: Date;
+  date_end: Date;
+}
+const { title, description, cover_photo, destinations, date_start, date_end } = Astro.props;
+---
+
+<div class="hero">
+  <div class="hero__image" style={`background-image: url(${cover_photo})`}></div>
+  <div class="hero__body">
+    <p class="label">{destinations.join(' · ')}</p>
+    <h1 class="hero__title">{title}</h1>
+    <p class="hero__dates">{formatDateRange(date_start, date_end)}</p>
+    <p class="hero__description">{description}</p>
+  </div>
+</div>
+
+<style>
+  .hero { margin-bottom: 2rem; }
+  .hero__image {
+    width: 100%;
+    height: 320px;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--border);
+    border-radius: 3px;
+    margin-bottom: 1.5rem;
+  }
+  .hero__title { margin: 0.4rem 0 0.3rem; }
+  .hero__dates {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+  .hero__description {
+    font-style: italic;
+    color: var(--text-muted);
+    max-width: 620px;
+  }
+</style>
