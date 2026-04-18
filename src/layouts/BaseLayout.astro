@@ -1,0 +1,31 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  noindex?: boolean;
+}
+const { title, description, noindex = false } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} — Andrew & Kim Travel</title>
+  {description && <meta name="description" content={description} />}
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" class="site-name">Travel</a>
+  </header>
+  <main>
+    <slot />
+  </main>
+  <footer class="site-footer">
+    <p class="label">Andrew Greenlee</p>
+  </footer>
+</body>
+</html>
