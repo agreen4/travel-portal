@@ -6,13 +6,16 @@
   --text-light: #999;
   --border: #e0ddd8;
   --accent: #2c5f8a;
+  --accent-hover: #245078;
   --font-serif: Georgia, 'Times New Roman', serif;
   --font-sans: system-ui, -apple-system, sans-serif;
   --max-width: 860px;
   --side-panel-width: 280px;
 }
 
+html { font-size: 100%; }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 body {
   background: var(--bg);
