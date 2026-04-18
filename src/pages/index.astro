@@ -38,4 +38,14 @@ const past = allTrips
   {allTrips.length === 0 && (
     <p style="color: var(--text-muted); font-style: italic;">No trips yet.</p>
   )}
+
+  <form name="suggest" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="author" />
+    <textarea name="note"></textarea>
+    <input type="url" name="url" />
+    <input type="hidden" name="trip_slug" />
+    <input type="hidden" name="activity_id" />
+    <input type="hidden" name="form-name" value="suggest" />
+    <input name="bot-field" />
+  </form>
 </BaseLayout>
