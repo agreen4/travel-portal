@@ -1,0 +1,47 @@
+---
+// src/components/ActivityBlock.astro
+interface Props {
+  id: string;
+  time?: string;
+  name: string;
+  description?: string;
+  url?: string;
+  photo?: string;
+  suggestMode: boolean;
+}
+const { id, time, name, description, url, photo, suggestMode } = Astro.props;
+---
+
+<div class="activity" data-activity-id={id}>
+  {time && <p class="activity__time label">{time}</p>}
+  <div class="activity__content">
+    {url
+      ? <a href={url} target="_blank" rel="noopener" class="activity__name">{name}</a>
+      : <p class="activity__name">{name}</p>
+    }
+    {description && <p class="activity__desc">{description}</p>}
+    {photo && <img src={photo} alt={name} class="activity__photo" loading="lazy" />}
+    {suggestMode && (
+      <button class="suggest-trigger label" data-for={id}>+ note</button>
+    )}
+  </div>
+</div>
+
+<style>
+  .activity { display: flex; gap: 0.75rem; margin-bottom: 1.25rem; }
+  .activity__time { min-width: 60px; padding-top: 2px; }
+  .activity__content { flex: 1; }
+  .activity__name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.2rem; display: block; }
+  .activity__desc { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+  .activity__photo { border-radius: 3px; margin-top: 0.5rem; max-height: 200px; object-fit: cover; }
+  .suggest-trigger {
+    margin-top: 0.4rem;
+    background: none;
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    padding: 2px 10px;
+    cursor: pointer;
+    color: var(--text-muted);
+  }
+  .suggest-trigger:hover { border-color: var(--accent); color: var(--accent); }
+</style>
