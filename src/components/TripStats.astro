@@ -1,0 +1,44 @@
+---
+// src/components/TripStats.astro
+import { computeStats } from '../utils/trip-stats';
+
+interface Props {
+  days: Parameters<typeof computeStats>[0];
+}
+const { days } = Astro.props;
+const stats = computeStats(days);
+---
+
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat__value">{stats.cities}</span>
+    <span class="stat__label">Cities</span>
+  </div>
+  <div class="stat">
+    <span class="stat__value">{stats.nights}</span>
+    <span class="stat__label">Nights</span>
+  </div>
+  <div class="stat">
+    <span class="stat__value">{stats.hotels}</span>
+    <span class="stat__label">Hotels</span>
+  </div>
+  <div class="stat">
+    <span class="stat__value">{stats.restaurants}</span>
+    <span class="stat__label">Restaurants</span>
+  </div>
+</div>
+
+<style>
+  .stats-bar {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+    font-family: var(--font-sans);
+  }
+  .stat { text-align: center; }
+  .stat__value { display: block; font-size: 1.4rem; font-weight: 600; color: var(--text); }
+  .stat__label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+</style>
