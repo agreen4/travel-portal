@@ -7,9 +7,9 @@ interface Props {
   dish?: string;
   notes?: string;
   url?: string;
-  suggestMode: boolean;
+  suggestMode?: boolean;
 }
-const { id, time, restaurant, dish, notes, url, suggestMode } = Astro.props;
+const { id, time, restaurant, dish, notes, url } = Astro.props;
 ---
 
 <div class="meal" data-activity-id={id}>
@@ -23,9 +23,7 @@ const { id, time, restaurant, dish, notes, url, suggestMode } = Astro.props;
       }
       {dish && <p class="meal__dish">{dish}</p>}
       {notes && <p class="meal__notes">{notes}</p>}
-      {suggestMode && (
-        <button class="suggest-trigger label" data-for={id}>+ note</button>
-      )}
+      <button class="suggest-trigger label" data-for={id}>+ note</button>
     </div>
   </div>
 </div>
@@ -39,6 +37,7 @@ const { id, time, restaurant, dish, notes, url, suggestMode } = Astro.props;
   .meal__dish { font-style: italic; font-size: 0.875rem; margin-bottom: 0.15rem; color: var(--text-muted); }
   .meal__notes { font-size: 0.85rem; color: var(--text-muted); }
   .suggest-trigger {
+    display: none;
     margin-top: 0.4rem;
     background: none;
     border: 1px dashed var(--border);
@@ -47,5 +46,6 @@ const { id, time, restaurant, dish, notes, url, suggestMode } = Astro.props;
     cursor: pointer;
     color: var(--text-muted);
   }
+  :global(.suggest-active) .suggest-trigger { display: inline-block; }
   .suggest-trigger:hover { border-color: var(--accent); color: var(--accent); }
 </style>

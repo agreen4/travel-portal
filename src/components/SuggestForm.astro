@@ -1,0 +1,84 @@
+---
+// src/components/SuggestForm.astro
+interface Props { tripSlug: string; }
+const { tripSlug } = Astro.props;
+---
+
+<form
+  class="suggest-form"
+  name="trip-suggestions"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+>
+  <input type="hidden" name="form-name" value="trip-suggestions" />
+  <input type="hidden" name="trip_slug" value={tripSlug} />
+  <input type="hidden" name="activity_id" id="suggest-activity-id" value="" />
+  <p hidden><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+  <p class="suggest-form__context label" id="suggest-context">Select an item to annotate</p>
+
+  <label class="suggest-form__label label" for="suggest-author">Your name</label>
+  <input class="suggest-form__input" id="suggest-author" name="author" type="text" placeholder="Kim" required />
+
+  <label class="suggest-form__label label" for="suggest-note">Note</label>
+  <textarea class="suggest-form__input" id="suggest-note" name="note" rows="3" placeholder="Your thoughts..." required></textarea>
+
+  <label class="suggest-form__label label" for="suggest-url">Link (optional)</label>
+  <input class="suggest-form__input" id="suggest-url" name="url" type="url" placeholder="https://..." />
+
+  <button class="suggest-form__submit" type="submit">Submit note</button>
+  <p class="suggest-form__success" hidden>Thanks — note submitted!</p>
+</form>
+
+<script>
+  // Handle form submission feedback
+  const form = document.querySelector('.suggest-form') as HTMLFormElement;
+  const success = document.querySelector('.suggest-form__success') as HTMLElement;
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      await fetch('/', { method: 'POST', body: data });
+      form.reset();
+      success.hidden = false;
+      setTimeout(() => { success.hidden = true; }, 4000);
+    });
+  }
+</script>
+
+<style>
+  .suggest-form { display: flex; flex-direction: column; gap: 0.5rem; }
+  .suggest-form__context {
+    padding: 0.4rem 0.6rem;
+    background: var(--border);
+    border-radius: 3px;
+    margin-bottom: 0.25rem;
+    font-size: 0.65rem;
+  }
+  .suggest-form__label { margin-top: 0.25rem; }
+  .suggest-form__input {
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.4rem 0.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    background: white;
+    width: 100%;
+    resize: vertical;
+  }
+  .suggest-form__input:focus { outline: 2px solid var(--accent); border-color: transparent; }
+  .suggest-form__submit {
+    margin-top: 0.25rem;
+    padding: 0.5rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .suggest-form__submit:hover { opacity: 0.85; }
+  .suggest-form__success { font-family: var(--font-sans); font-size: 0.8rem; color: green; text-align: center; }
+</style>

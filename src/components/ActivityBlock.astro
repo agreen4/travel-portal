@@ -7,9 +7,9 @@ interface Props {
   description?: string;
   url?: string;
   photo?: string;
-  suggestMode: boolean;
+  suggestMode?: boolean;
 }
-const { id, time, name, description, url, photo, suggestMode } = Astro.props;
+const { id, time, name, description, url, photo } = Astro.props;
 ---
 
 <div class="activity" data-activity-id={id}>
@@ -21,9 +21,7 @@ const { id, time, name, description, url, photo, suggestMode } = Astro.props;
     }
     {description && <p class="activity__desc">{description}</p>}
     {photo && <img src={photo} alt={name} class="activity__photo" loading="lazy" />}
-    {suggestMode && (
-      <button class="suggest-trigger label" data-for={id}>+ note</button>
-    )}
+    <button class="suggest-trigger label" data-for={id}>+ note</button>
   </div>
 </div>
 
@@ -35,6 +33,7 @@ const { id, time, name, description, url, photo, suggestMode } = Astro.props;
   .activity__desc { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.4rem; }
   .activity__photo { border-radius: 3px; margin-top: 0.5rem; max-height: 200px; object-fit: cover; }
   .suggest-trigger {
+    display: none;
     margin-top: 0.4rem;
     background: none;
     border: 1px dashed var(--border);
@@ -43,5 +42,6 @@ const { id, time, name, description, url, photo, suggestMode } = Astro.props;
     cursor: pointer;
     color: var(--text-muted);
   }
+  :global(.suggest-active) .suggest-trigger { display: inline-block; }
   .suggest-trigger:hover { border-color: var(--accent); color: var(--accent); }
 </style>

@@ -1,10 +1,101 @@
 ---
-// Stub — full implementation in Task 15
+// src/components/SidePanel.astro
+import SuggestForm from './SuggestForm.astro';
+
+interface PreInput { activity_id: string; author: string; note: string; url?: string; }
 interface Props {
-  preInput: { activity_id: string; author: string; note: string; url?: string; }[];
+  preInput: PreInput[];
   suggestMode: boolean;
   tripSlug: string;
 }
-const { preInput, suggestMode, tripSlug } = Astro.props;
+const { preInput, tripSlug } = Astro.props;
+
+// Group notes by activity_id
+const notesByActivity = preInput.reduce<Record<string, PreInput[]>>((acc, item) => {
+  (acc[item.activity_id] ??= []).push(item);
+  return acc;
+}, {});
 ---
-<!-- SidePanel stub -->
+
+<aside class="side-panel" id="side-panel">
+  <div class="side-panel__header">
+    <h3 class="label">Notes</h3>
+  </div>
+
+  <div class="side-panel__notes" id="side-panel-notes">
+    {Object.keys(notesByActivity).length === 0 && (
+      <p class="side-panel__empty label">No notes yet.</p>
+    )}
+    {Object.entries(notesByActivity).map(([actId, notes]) => (
+      <div class="note-group" data-activity-id={actId}>
+        {notes.map(n => (
+          <div class="note">
+            <p class="note__author label">{n.author}</p>
+            <p class="note__text">{n.note}</p>
+            {n.url && <a href={n.url} class="note__link label" target="_blank" rel="noopener">Link →</a>}
+          </div>
+        ))}
+      </div>
+    ))}
+  </div>
+
+  <div class="side-panel__form">
+    <SuggestForm {tripSlug} />
+  </div>
+</aside>
+
+<script>
+  // Wire up suggest-trigger buttons to the side panel form
+  const activityIdField = document.getElementById('suggest-activity-id') as HTMLInputElement;
+  const contextLabel = document.getElementById('suggest-context') as HTMLElement;
+
+  document.querySelectorAll('.suggest-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-for') ?? '';
+      const name = btn.closest('[data-activity-id]')?.querySelector('.activity__name, .meal__name')?.textContent?.trim() ?? id;
+      activityIdField.value = id;
+      contextLabel.textContent = `Noting: ${name}`;
+
+      // Scroll panel into view on mobile
+      document.getElementById('side-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+<style>
+  .side-panel {
+    display: none;
+    position: sticky;
+    top: 60px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1rem;
+    background: white;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+  }
+  :global(.suggest-active) .side-panel,
+  :global(.has-notes) .side-panel { display: block; }
+
+  .side-panel__header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .side-panel__empty { color: var(--text-light); font-style: italic; }
+  .side-panel__form {
+    display: none;
+    margin-top: 1rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+  :global(.suggest-active) .side-panel__form { display: block; }
+
+  .note { margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+  .note:last-child { border-bottom: none; }
+  .note__author { color: var(--accent); margin-bottom: 0.2rem; }
+  .note__text { color: var(--text); line-height: 1.4; margin-bottom: 0.2rem; }
+  .note__link { color: var(--text-muted); }
+</style>

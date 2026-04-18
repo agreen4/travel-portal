@@ -20,11 +20,9 @@ const { trip } = Astro.props;
 const { title, description, visibility, days, pre_trip_input, cover_photo, destinations, date_start, date_end } = trip.data;
 
 // suggestMode is always false at build time for static output.
-// Task 15 will add client-side JS to detect ?suggest=true and activate the panel.
-const suggestMode = false;
+// Client-side JS below detects ?suggest=true and adds .suggest-active to body.
 const noindex = visibility === 'unlisted';
 const isPrivate = visibility === 'private';
-const showPanel = pre_trip_input.length > 0;
 ---
 
 <BaseLayout {title} {description} {noindex}>
@@ -32,7 +30,7 @@ const showPanel = pre_trip_input.length > 0;
   <TripStats {days} />
   <JumpNav {days} />
 
-  <div class:list={['trip-body', showPanel && 'trip-body--suggest']}>
+  <div class="trip-body" id="trip-body">
     <div class="timeline">
       {days.map(day => (
         <TimelineDay
@@ -45,12 +43,24 @@ const showPanel = pre_trip_input.length > 0;
       ))}
     </div>
 
-    {showPanel && (
-      <SidePanel
-        preInput={pre_trip_input}
-        suggestMode={false}
-        tripSlug={trip.id}
-      />
-    )}
+    <SidePanel
+      preInput={pre_trip_input}
+      suggestMode={false}
+      tripSlug={trip.id}
+    />
   </div>
 </BaseLayout>
+
+<script>
+  // Activate suggest mode client-side if ?suggest=true
+  if (new URLSearchParams(window.location.search).get('suggest') === 'true') {
+    document.body.classList.add('suggest-active');
+    document.getElementById('trip-body')?.classList.add('trip-body--suggest');
+  }
+  // Show the side panel if there are notes (has-notes class on body)
+  const panel = document.getElementById('side-panel');
+  if (panel) {
+    const hasNotes = panel.querySelectorAll('.note').length > 0;
+    if (hasNotes) document.body.classList.add('has-notes');
+  }
+</script>
