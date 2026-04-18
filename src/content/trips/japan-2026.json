@@ -1,0 +1,790 @@
+{
+  "title": "Hong Kong & Japan — May/June 2026",
+  "visibility": "private",
+  "destinations": ["Hong Kong", "Tokyo", "Atami", "Hiroshima", "Kyoto"],
+  "date_start": "2026-05-25",
+  "date_end": "2026-06-12",
+  "cover_photo": "",
+  "description": "Three weeks across Hong Kong, Tokyo, Atami, Hiroshima, and Kyoto — Michelin dim sum, ryokan onsen, DisneySea, the Peace Memorial Museum, and a farewell wagyu dinner in Osaka.",
+  "days": [
+    {
+      "date": "2026-05-26",
+      "location": "Hong Kong",
+      "notes": "Late arrival (~9pm) on CX 801. Airport Express to Kowloon Station, then free K3 shuttle to Hotel ICON. Short walk to Kai Kai Dessert for a late-night first taste of Hong Kong.",
+      "accommodation": {
+        "name": "Hotel ICON — 80 Suite King",
+        "url": "https://www.hotel-icon.com",
+        "confirmation": "#51197SF673858"
+      },
+      "activities": [
+        {
+          "id": "hk-airport-arrival",
+          "time": "9:00 PM",
+          "name": "Arrive Hong Kong (CX 801)",
+          "description": "Clear customs, take Airport Express to Kowloon Station, then free K3 shuttle to Hotel ICON. Check in ~10:30pm."
+        },
+        {
+          "id": "hk-kai-kai-dessert",
+          "time": "11:00 PM",
+          "name": "Kai Kai Dessert",
+          "description": "Michelin Bib Gourmand dessert stall open until 1am (113–115 Parkes Street, Jordan). Black sesame soup and tofu skin with ginkgo."
+        }
+      ],
+      "meals": []
+    },
+    {
+      "date": "2026-05-27",
+      "location": "Hong Kong",
+      "notes": "Full day: Michelin dim sum at Yat Tung Heen, cable car and Buddha on Lantau, golden-hour cocktails at Ozone, and late Cantonese dinner at Above & Beyond.",
+      "accommodation": {
+        "name": "Hotel ICON — 80 Suite King",
+        "url": "https://www.hotel-icon.com",
+        "confirmation": "#51197SF673858"
+      },
+      "activities": [
+        {
+          "id": "hk-ngong-ping-cable-car",
+          "time": "1:00 PM",
+          "name": "Ngong Ping 360 Cable Car & Tian Tan Buddha",
+          "description": "MTR to Tung Chung, then cable car up to Ngong Ping plateau. Visit the giant bronze Tian Tan Buddha and the Wisdom Path. Leave Lantau by 4:30pm for Ozone.",
+          "url": "https://www.np360.com.hk"
+        },
+        {
+          "id": "hk-ozone-bar",
+          "time": "6:00 PM",
+          "name": "Ozone Bar — Ritz-Carlton ICC",
+          "description": "World's highest bar at the Ritz-Carlton ICC Tower. Golden hour and harbour sunset views. Smart casual; children under 12 allowed before 9pm. Confirmation: HKGKW-6ZPDX34SFV5D.",
+          "url": "https://www.ritzcarlton.com/en/hotels/china/hong-kong/dining/ozone"
+        },
+        {
+          "id": "hk-symphony-of-lights",
+          "time": "8:00 PM",
+          "name": "Symphony of Lights (optional)",
+          "description": "Free nightly harbour laser and light show from the TST waterfront. Tight after Ozone — consider catching on May 26 or 28 instead."
+        }
+      ],
+      "meals": [
+        {
+          "id": "hk-yat-tung-heen",
+          "time": "11:00 AM",
+          "restaurant": "Yat Tung Heen",
+          "dish": "Traditional Cantonese dim sum",
+          "notes": "Michelin one-star at the Eaton Hotel, Jordan. Traditional Cantonese dim sum since 1990. Confirmation: #73HUHAZSBJBA.",
+          "url": "https://www.eatonhk.com/dining/yat-tung-heen/"
+        },
+        {
+          "id": "hk-above-and-beyond",
+          "time": "9:00 PM",
+          "restaurant": "Above & Beyond — Hotel ICON",
+          "dish": "Michelin Cantonese cuisine",
+          "notes": "28th floor Cantonese restaurant at Hotel ICON with panoramic harbour views. Open until 11pm. Book via hotel or OpenTable.",
+          "url": "https://www.hotel-icon.com/dining/above-beyond"
+        }
+      ]
+    },
+    {
+      "date": "2026-05-28",
+      "location": "Hong Kong",
+      "notes": "Hong Kong Island day: Star Ferry to Central, Michelin roast goose at Yat Lok, Victoria Peak, and the Hollywood Road / Man Mo Temple / SoHo corridor.",
+      "accommodation": {
+        "name": "Hotel ICON — 80 Suite King",
+        "url": "https://www.hotel-icon.com",
+        "confirmation": "#51197SF673858"
+      },
+      "activities": [
+        {
+          "id": "hk-star-ferry",
+          "time": "10:15 AM",
+          "name": "Star Ferry — TST to Central",
+          "description": "Classic 10-minute harbour crossing from Tsim Sha Tsui Pier to Central."
+        },
+        {
+          "id": "hk-victoria-peak",
+          "time": "12:30 PM",
+          "name": "Victoria Peak",
+          "description": "Peak Tram from Garden Road terminus up to the Peak for sweeping harbour and city skyline views. Allow ~2 hours."
+        },
+        {
+          "id": "hk-hollywood-road-soho",
+          "time": "3:00 PM",
+          "name": "Hollywood Road, Man Mo Temple & SoHo",
+          "description": "Walk Hollywood Road to the incense-filled Man Mo Temple, then wander through SoHo's street art scene. Stop at Snack Baby Gelato (2025 Michelin Guide entry)."
+        }
+      ],
+      "meals": [
+        {
+          "id": "hk-yat-lok",
+          "time": "11:00 AM",
+          "restaurant": "Yat Lok Roast Goose",
+          "dish": "Roast goose with lai fun noodles",
+          "notes": "Michelin one-star on Stanley Street. Arrive by 10:45am to queue before 11am opening. Cash only (~HK$150–200/person); expect shared tables.",
+          "url": "https://www.tripadvisor.com/Restaurant_Review-g294217-d2336668-Reviews-Yat_Lok-Hong_Kong.html"
+        },
+        {
+          "id": "hk-icon-market-buffet",
+          "time": "6:00 PM",
+          "restaurant": "The Market Buffet — Hotel ICON",
+          "notes": "Convenient dinner at the hotel after a full day on Hong Kong Island. Good positioning for the early departure the next morning."
+        }
+      ]
+    },
+    {
+      "date": "2026-05-29",
+      "location": "Hong Kong / Tokyo",
+      "notes": "Check out of Hotel ICON by 8am. CX 520 departs 10:40am, arrives Tokyo Narita 4:05pm. Keisei Skyliner to Ueno (~41 min). Evening wander at Ameyoko Market and seafood dinner.",
+      "accommodation": {
+        "name": "&Here Tokyo Ueno — Deluxe Family (Takumi)",
+        "url": "https://andherehotels.jp/tokyoueno/en/",
+        "confirmation": "Itinerary #73326675999672"
+      },
+      "activities": [
+        {
+          "id": "tok-narita-arrival",
+          "time": "4:05 PM",
+          "name": "Arrive Tokyo Narita (CX 520)",
+          "description": "Take the Keisei Skyliner directly to Ueno Station (~41 min). Check in to &Here Tokyo Ueno by ~5:30–6pm.",
+          "url": "https://www.keisei.co.jp/keisei/tetudou/skyliner/us/skyliner/index.php"
+        },
+        {
+          "id": "tok-ameyoko-market",
+          "time": "6:30 PM",
+          "name": "Ameyoko Market",
+          "description": "Lively open-air market right outside Ueno Station — vendors, street food, fresh fish. Follow with a sunset stroll around Shinobazu Pond."
+        }
+      ],
+      "meals": [
+        {
+          "id": "tok-sadogashima-e-watare",
+          "time": "7:30 PM",
+          "restaurant": "佐渡島へ渡れ (Sadogashima e Watare)",
+          "dish": "Fresh oysters and seasonal sashimi from Sado Island",
+          "notes": "Seafood izakaya specializing in Niigata coast seafood and local sake. All private room seating, ~¥4,000–5,000/person, 3-min walk from JR Ueno Station. Reserve on Tabelog."
+        }
+      ]
+    },
+    {
+      "date": "2026-05-30",
+      "location": "Tokyo",
+      "notes": "Early Senso-ji and Yanaka, then Skytree and a deep-dish Tokyo day. Sukiyaki dinner at the century-old Ningyocho Imahan.",
+      "accommodation": {
+        "name": "&Here Tokyo Ueno — Deluxe Family (Takumi)",
+        "url": "https://andherehotels.jp/tokyoueno/en/",
+        "confirmation": "Itinerary #73326675999672"
+      },
+      "activities": [
+        {
+          "id": "tok-sensoji",
+          "time": "7:00 AM",
+          "name": "Sensō-ji Temple, Asakusa",
+          "description": "Arrive before the tourist buses for the full atmospheric experience — incense drifting through the great gate, Nakamise-dori quiet and hushed."
+        },
+        {
+          "id": "tok-yanaka",
+          "time": "9:00 AM",
+          "name": "Yanaka Neighborhood",
+          "description": "One of Tokyo's best-preserved shitamachi neighborhoods. Walk Yanaka Ginza shotengai, the atmospheric cemetery, and stop at a local kissaten for coffee."
+        },
+        {
+          "id": "tok-suzukien-matcha",
+          "time": "1:30 PM",
+          "name": "Suzukien Matcha Gelato",
+          "description": "Famous for 7-level matcha gelato in ascending intensity. Hanakawado Street — order Level 7."
+        },
+        {
+          "id": "tok-skytree",
+          "time": "2:00 PM",
+          "name": "Tokyo Skytree",
+          "description": "Panoramic views across Tokyo. Book tickets in advance (window opens April 30 for May 30). Browse Solamachi shopping complex at the base.",
+          "url": "https://www.tokyo-skytree.jp/en/"
+        },
+        {
+          "id": "tok-okachi-beer-lab",
+          "time": "9:00 PM",
+          "name": "OKACHI Beer Lab",
+          "description": "Craft beer and grilled meat 5-min walk from the hotel. Low-key, convivial end to the day."
+        }
+      ],
+      "meals": [
+        {
+          "id": "tok-torimitsukuni-lunch",
+          "time": "12:00 PM",
+          "restaurant": "Torimitsukuni Ueno",
+          "dish": "Yakitori",
+          "notes": "Casual yakitori lunch near Ueno. No reservation needed."
+        },
+        {
+          "id": "tok-imahan-sukiyaki",
+          "time": "5:30 PM",
+          "restaurant": "Ningyocho Imahan (Ueno Hirokoji branch)",
+          "dish": "Wagyu sukiyaki course",
+          "notes": "Sukiyaki institution since 1895. Server cooks wagyu tableside; drag each slice through raw egg yolk. Book in advance at imahan-tokyo.com; 10% service charge applies.",
+          "url": "https://www.imahan-tokyo.com"
+        }
+      ]
+    },
+    {
+      "date": "2026-05-31",
+      "location": "Tokyo",
+      "notes": "Meiji Jingu and Harajuku in the morning, then a Yokohama day trip for Cup Noodles Museum and the Shin-Yokohama Ramen Museum.",
+      "accommodation": {
+        "name": "&Here Tokyo Ueno — Deluxe Family (Takumi)",
+        "url": "https://andherehotels.jp/tokyoueno/en/",
+        "confirmation": "Itinerary #73326675999672"
+      },
+      "activities": [
+        {
+          "id": "tok-meiji-jingu",
+          "time": "8:30 AM",
+          "name": "Meiji Jingu Shrine & Yoyogi Park",
+          "description": "Forested shrine grounds — serene in early morning. Follow with Yoyogi Park and Takeshita Street for the full Harajuku street fashion spectacle."
+        },
+        {
+          "id": "tok-amam-dacotan",
+          "time": "11:00 AM",
+          "name": "AMAM DACOTAN Bakery",
+          "description": "One of Tokyo's most celebrated bakeries, known for extraordinary sourdough and pastries. Opens 11am — pick up something for the Yokohama journey."
+        },
+        {
+          "id": "tok-cup-noodles-museum",
+          "time": "12:30 PM",
+          "name": "Cup Noodles Museum, Yokohama",
+          "description": "Minato Mirai waterfront. Highlight is the My CUPNOODLES Factory — design your own personalized cup with choice of soup and toppings. Walk-in on a numbered ticket system.",
+          "url": "https://www.cupnoodles-museum.jp/en/yokohama/"
+        },
+        {
+          "id": "tok-red-brick-warehouse",
+          "time": "3:00 PM",
+          "name": "Yokohama Red Brick Warehouse",
+          "description": "Beautifully restored 1913 port warehouses with open waterfront park and cafe terraces. A relaxed 30-min pause before the ramen museum."
+        },
+        {
+          "id": "tok-ramen-museum",
+          "time": "4:00 PM",
+          "name": "Shin-Yokohama Ramen Museum",
+          "description": "Underground recreation of a 1950s Tokyo backstreet housing 9 ramen shops from distinct regional styles. Order mini (ko) portions to try 3–4 styles. ¥380 admission.",
+          "url": "https://www.raumen.co.jp/english/"
+        }
+      ],
+      "meals": []
+    },
+    {
+      "date": "2026-06-01",
+      "location": "Tokyo",
+      "notes": "Early Tsukiji morning, Ginza browse, teamLab Borderless at 2pm, then Shinjuku for ramen dinner.",
+      "accommodation": {
+        "name": "&Here Tokyo Ueno — Deluxe Family (Takumi)",
+        "url": "https://andherehotels.jp/tokyoueno/en/",
+        "confirmation": "Itinerary #73326675999672"
+      },
+      "activities": [
+        {
+          "id": "tok-tsukiji-market",
+          "time": "8:00 AM",
+          "name": "Tsukiji Outer Market",
+          "description": "Walk the stalls: coffee at Turret Coffee, tamagoyaki at Marutake, eel skewers at Nisshin Tasuke, mochi at Solatsuki. Walk-and-eat style."
+        },
+        {
+          "id": "tok-ginza",
+          "time": "9:30 AM",
+          "name": "Ginza & KITTE Marunouchi",
+          "description": "Melon pan at Ginza Kimuraya, Mitsukoshi Ginza basement food hall, and TRAVELER'S FACTORY STATION near Tokyo Station for stationery."
+        },
+        {
+          "id": "tok-teamlab-borderless",
+          "time": "2:00 PM",
+          "name": "teamLab Borderless, Azabudai Hills",
+          "description": "One of the world's most extraordinary digital art installations. Ticket number AKLYCXFM4YLM-0001. Allow 2–3 hours; large bags must be checked at entrance.",
+          "url": "https://teamlab.art/e/tokyo/"
+        },
+        {
+          "id": "tok-tokyo-metro-gov-deck",
+          "time": "5:00 PM",
+          "name": "Tokyo Metropolitan Government Building Observation Deck",
+          "description": "Free night views, open until 10:30pm. Low-effort panoramic view if energy allows before dinner."
+        }
+      ],
+      "meals": [
+        {
+          "id": "tok-nemuro-hanamaru",
+          "time": "11:00 AM",
+          "restaurant": "Nemuro Hanamaru (KITTE Marunouchi 5F)",
+          "dish": "Conveyor belt sushi (Hokkaido fish)",
+          "notes": "Excellent quality fish from Hokkaido. Opens at 11am; arrive early to beat the lunch queue.",
+          "url": "https://www.sushi-hanamaru.com/store/store_kitte.html"
+        },
+        {
+          "id": "tok-fuunji-ramen",
+          "time": "5:00 PM",
+          "restaurant": "Fūunji",
+          "dish": "Tsukemen dipping ramen",
+          "notes": "Near Yoyogi, 10 min south of Shinjuku Station. Arrive 4:40–4:45pm to queue before the 5pm dinner opening — among the best tsukemen in Tokyo."
+        }
+      ]
+    },
+    {
+      "date": "2026-06-02",
+      "location": "Tokyo",
+      "notes": "Full day at Tokyo DisneySea. Leave hotel by 7:45am to reach the gates by 8:30am (park opens 9am). Priority: Fantasy Springs, Journey to the Center of the Earth, Tower of Terror.",
+      "accommodation": {
+        "name": "&Here Tokyo Ueno — Deluxe Family (Takumi)",
+        "url": "https://andherehotels.jp/tokyoueno/en/",
+        "confirmation": "Itinerary #73326675999672"
+      },
+      "activities": [
+        {
+          "id": "tok-disneysea",
+          "time": "9:00 AM",
+          "name": "Tokyo DisneySea",
+          "description": "Reservation A00555726363. Priority: Fantasy Springs (Frozen/Tangled/Peter Pan), Journey to the Center of the Earth, Tower of Terror. Buy Disney Premier Access for Frozen immediately after entry.",
+          "url": "https://www.tokyodisneyresort.jp/en/tds/"
+        }
+      ],
+      "meals": []
+    },
+    {
+      "date": "2026-06-03",
+      "location": "Tokyo / Atami",
+      "notes": "Slow final Tokyo morning in Ueno, then Shinkansen to Atami (~50 min, depart 13:57). Afternoon in Atami town before ryokan check-in and kaiseki dinner.",
+      "accommodation": {
+        "name": "Atami Sekaie — Ocean View Suite Tsuki no Michi",
+        "url": "https://www.atamisekaie.jp/en/",
+        "confirmation": "#3227-2490-4521"
+      },
+      "activities": [
+        {
+          "id": "tok-anmitsu-mihashi",
+          "time": "8:30 AM",
+          "name": "Anmitsu Mihashi",
+          "description": "One of Tokyo's oldest traditional sweet shops, serving anmitsu (agar jelly, sweet bean paste, and syrup)."
+        },
+        {
+          "id": "tok-2k540-artisan",
+          "time": "10:00 AM",
+          "name": "2k540 Aki-Oka Artisan",
+          "description": "Craft and design shops tucked under the JR train viaduct near Akihabara — last souvenir shopping before leaving Ueno."
+        },
+        {
+          "id": "atami-shinkansen",
+          "time": "1:57 PM",
+          "name": "Shinkansen: Tokyo → Atami",
+          "description": "Tokaido Shinkansen from Tokyo Station. Depart ~13:57, arrive Atami ~14:42 (~45 min)."
+        },
+        {
+          "id": "atami-ginza-walk",
+          "time": "3:00 PM",
+          "name": "Atami Ginza & Ieyasu no Yu Footbath",
+          "description": "Stroll the main shopping street, pick up onsen manju (steamed over hot springs), and soak feet at the free footbath outside the station."
+        },
+        {
+          "id": "atami-kiunkaku",
+          "time": "4:00 PM",
+          "name": "Kiunkaku Villa",
+          "description": "Beautifully preserved 1919 villa with Roman-style baths, Art Deco stained glass, and terraced gardens. Closes at 5pm — arrive by 4pm."
+        },
+        {
+          "id": "atami-sekaie-checkin",
+          "time": "6:00 PM",
+          "name": "Check in — Atami Sekaie Ryokan",
+          "description": "Ocean View Suite Tsuki no Michi. Settle in, onsen soak, and multi-course kaiseki dinner of local Izu seafood.",
+          "url": "https://www.atamisekaie.jp/en/"
+        }
+      ],
+      "meals": []
+    },
+    {
+      "date": "2026-06-04",
+      "location": "Atami / Hiroshima",
+      "notes": "Traditional ryokan breakfast, final morning soak, check out by 11am, and Shinkansen to Hiroshima (~4h 15min). Arrive mid-afternoon; gentle wander and Grill Hikoboshi dinner.",
+      "accommodation": {
+        "name": "Sheraton Grand Hiroshima — King Bed, Club Lounge",
+        "url": "https://www.marriott.com/en-us/hotels/hijsi-sheraton-grand-hiroshima-hotel/overview/",
+        "confirmation": "#81521547"
+      },
+      "activities": [
+        {
+          "id": "atami-ryokan-breakfast",
+          "time": "7:30 AM",
+          "name": "Ryokan Breakfast & Final Onsen",
+          "description": "Traditional breakfast — grilled fish, rice, pickles, miso soup. Final morning soak. Check out by 11am."
+        },
+        {
+          "id": "atami-to-hiroshima-shinkansen",
+          "time": "11:43 AM",
+          "name": "Shinkansen: Atami → Hiroshima",
+          "description": "Hikari from Atami to Shin-Osaka, transfer to Sakura to Hiroshima. ~4h 15min total. Pick up an ekiben bento at Atami Station."
+        },
+        {
+          "id": "hiro-hondori-walk",
+          "time": "4:00 PM",
+          "name": "Hondori Covered Shopping Arcade",
+          "description": "Gentle introductory wander through Hiroshima's lively pedestrian main street. Sheraton is directly connected to Hiroshima Station."
+        }
+      ],
+      "meals": [
+        {
+          "id": "hiro-grill-hikoboshi",
+          "time": "6:30 PM",
+          "restaurant": "Grill Hikoboshi",
+          "dish": "Omurice and hamburger steak with demi-glace",
+          "notes": "Tiny ten-seat counter in the Hondori district. Book as early as possible on Tabelog — this is one of the harder reservations on the trip."
+        }
+      ]
+    },
+    {
+      "date": "2026-06-05",
+      "location": "Hiroshima",
+      "notes": "Dedicated Hiroshima history day: Peace Memorial Museum and Park in the morning, Hiroshima-style okonomiyaki for lunch, and the castle and Orizuru Tower in the afternoon.",
+      "accommodation": {
+        "name": "Sheraton Grand Hiroshima — King Bed, Club Lounge",
+        "url": "https://www.marriott.com/en-us/hotels/hijsi-sheraton-grand-hiroshima-hotel/overview/",
+        "confirmation": "#81521547"
+      },
+      "activities": [
+        {
+          "id": "hiro-peace-museum",
+          "time": "8:00 AM",
+          "name": "Hiroshima Peace Memorial Museum & Park",
+          "description": "Allow at least 2 hours in the museum — among the world's most significant and moving. Walk the Park: A-Bomb Dome, Children's Peace Monument, and cenotaph. Photography not permitted in main exhibition halls.",
+          "url": "https://hpmmuseum.jp/?lang=eng"
+        },
+        {
+          "id": "hiro-castle",
+          "time": "2:00 PM",
+          "name": "Hiroshima Castle (Rijōkaku)",
+          "description": "Postwar reconstruction on original foundations with an intact moat. Interior museum of Hiroshima history (45 min)."
+        },
+        {
+          "id": "hiro-orizuru-tower",
+          "time": "3:30 PM",
+          "name": "Hiroshima Orizuru Tower",
+          "description": "Contemporary architecture near Peace Park with observation deck and the origami crane drop installation — a meaningful coda to the day's themes."
+        }
+      ],
+      "meals": [
+        {
+          "id": "hiro-okonomimura",
+          "time": "12:00 PM",
+          "restaurant": "Okonomimura",
+          "dish": "Hiroshima-style okonomiyaki",
+          "notes": "Three-story building with ~25 vendors. Walk in, point at what looks good, watch it cook in front of you. Hiroshima-style is layered — noodles, cabbage, egg, and meat stacked on the griddle.",
+          "url": "https://okonomimura.jp"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-06",
+      "location": "Hiroshima",
+      "notes": "Full day on Miyajima Island: Itsukushima Shrine, Daishoin Temple, fresh grilled oysters for lunch, and the ropeway up Mount Misen. Check tide times before departure.",
+      "accommodation": {
+        "name": "Sheraton Grand Hiroshima — King Bed, Club Lounge",
+        "url": "https://www.marriott.com/en-us/hotels/hijsi-sheraton-grand-hiroshima-hotel/overview/",
+        "confirmation": "#81521547"
+      },
+      "activities": [
+        {
+          "id": "hiro-miyajima-ferry",
+          "time": "8:30 AM",
+          "name": "Miyajima Island — JR Ferry from Miyajimaguchi",
+          "description": "JR Sanyo Line to Miyajimaguchi (~25 min), then 3-min walk to the ferry terminal. JR Ferry ~10 min to the island. Aim for first or second ferry to arrive by 8:30am."
+        },
+        {
+          "id": "hiro-itsukushima-shrine",
+          "time": "9:00 AM",
+          "name": "Itsukushima Shrine & Floating Torii Gate",
+          "description": "Walk the waterfront to the shrine built on stilts over the water — extraordinary at high tide. Check tide times for your visit. Walk to the far side for a quieter vantage."
+        },
+        {
+          "id": "hiro-daishoin-temple",
+          "time": "10:30 AM",
+          "name": "Daishoin Temple",
+          "description": "One of the island's most impressive Buddhist temples — far less crowded than the shrine. Stone lantern-lined paths, spinning prayer wheels, and profound quiet."
+        },
+        {
+          "id": "hiro-miyajima-ropeway",
+          "time": "2:00 PM",
+          "name": "Momijidani Park & Miyajima Ropeway",
+          "description": "Walk through maple-forested Momijidani Park, then take the ropeway partway up Mount Misen for panoramic Inland Sea views (~¥1,000/adult each way)."
+        },
+        {
+          "id": "hiro-momijido-manju",
+          "time": "4:00 PM",
+          "name": "Momijido Main Store — Momiji Manju",
+          "description": "Pick up maple leaf cakes (red bean, custard, or matcha) from Momijido Main Store on Omotesando Street — the quintessential Miyajima souvenir."
+        }
+      ],
+      "meals": [
+        {
+          "id": "hiro-miyajima-oysters",
+          "time": "11:30 AM",
+          "restaurant": "Yakigaki No Hayashi or Kakiya",
+          "dish": "Grilled Miyajima oysters",
+          "notes": "Both celebrated Miyajima oyster specialists. Try grilled, with cheese and lemon, or in oyster rice. Arrive by 11:30am to beat the lunch rush."
+        }
+      ]
+    },
+    {
+      "date": "2026-06-07",
+      "location": "Hiroshima / Kyoto",
+      "notes": "Light Club Lounge breakfast, check out by 11am, final okonomiyaki at Hiroshima Station Ekie food hall, then Nozomi Shinkansen to Kyoto (~1h 40min). Arrive ~1:15pm.",
+      "accommodation": {
+        "name": "Hotel Kanra Kyoto — Suite Main Building",
+        "url": "https://www.uds-hotels.com/en/kanra/kyoto/",
+        "confirmation": "#2351074222"
+      },
+      "activities": [
+        {
+          "id": "hiro-to-kyoto-shinkansen",
+          "time": "11:30 AM",
+          "name": "Shinkansen: Hiroshima → Kyoto (Nozomi)",
+          "description": "Nozomi Shinkansen from Hiroshima Station. ~1h 40min. Arrive Kyoto ~1:15pm."
+        },
+        {
+          "id": "kyo-higashi-honganji",
+          "time": "3:00 PM",
+          "name": "Higashi Honganji Temple",
+          "description": "Spectacular free-entry Jodo Shinshu Buddhist complex next door to Hotel Kanra — one of Japan's largest wooden structures. Perfect low-key first Kyoto stop."
+        },
+        {
+          "id": "kyo-gion-evening",
+          "time": "6:00 PM",
+          "name": "Gion Evening Walk",
+          "description": "Walk Hanamikoji Street and the quieter backstreets of Gion Shinbashi — Kyoto's most atmospheric district of stone lanes and wooden machiya townhouses."
+        },
+        {
+          "id": "kyo-yamaneko-bar",
+          "time": "9:30 PM",
+          "name": "Yamaneko Gion Craft Beer and Sake Bar",
+          "description": "Excellent craft beer and sake in the Gion neighborhood. Low-key nightcap after an arrival day."
+        }
+      ],
+      "meals": [
+        {
+          "id": "hiro-ekie-okonomiyaki",
+          "time": "10:30 AM",
+          "restaurant": "Ekie Food Hall — Hiroshima Station",
+          "dish": "Hiroshima-style okonomiyaki",
+          "notes": "Several solid okonomiyaki counters open from the morning inside Hiroshima Station. Final taste of Hiroshima before the train."
+        },
+        {
+          "id": "kyo-gion-kappa",
+          "time": "7:30 PM",
+          "restaurant": "Gion Kappa",
+          "dish": "Kyoto-style izakaya small plates",
+          "notes": "Beloved casual izakaya in the Gion backstreets — grilled skewers, tofu dishes, pickles, local sake. Book ahead on Tabelog; small and fills up."
+        }
+      ]
+    },
+    {
+      "date": "2026-06-08",
+      "location": "Kyoto",
+      "notes": "Full day in Arashiyama: early bamboo grove, Tenryu-ji garden, shojin ryori lunch at Shigetsu, and a refined tempura omakase dinner back in Gion.",
+      "accommodation": {
+        "name": "Hotel Kanra Kyoto — Suite Main Building",
+        "url": "https://www.uds-hotels.com/en/kanra/kyoto/",
+        "confirmation": "#2351074222"
+      },
+      "activities": [
+        {
+          "id": "kyo-bamboo-grove",
+          "time": "8:00 AM",
+          "name": "Arashiyama Bamboo Grove",
+          "description": "Arrive early — the only way to experience it without wall-to-wall crowds. Walk through into Tenryu-ji UNESCO World Heritage Zen temple with one of Kyoto's finest pond gardens.",
+          "url": "https://www.tenryuji.com/en/"
+        },
+        {
+          "id": "kyo-togetsukyo-craft",
+          "time": "2:00 PM",
+          "name": "Togetsukyo Bridge & Arashiyama Shops",
+          "description": "Wander the craft shops and riverside path along the famous Togetsukyo Bridge. Stop at Boulangerie Rauk for an afternoon snack before heading back to central Kyoto."
+        },
+        {
+          "id": "kyo-kyoto-beer-lab",
+          "time": "9:30 PM",
+          "name": "Kyoto Beer Lab",
+          "description": "Nightcap after dinner — excellent craft beer selection."
+        }
+      ],
+      "meals": [
+        {
+          "id": "kyo-shigetsu",
+          "time": "11:30 AM",
+          "restaurant": "Shigetsu at Tenryu-ji",
+          "dish": "Shojin ryori (Buddhist vegetarian multi-course)",
+          "notes": "One of Japan's finest shojin ryori restaurants inside Tenryu-ji's grounds. Seasonal vegetables, tofu, and mountain ingredients. Set menus from ~¥4,000/person. Book well in advance.",
+          "url": "https://www.tenryuji.com/en/shigetsu"
+        },
+        {
+          "id": "kyo-tempura-endo-yasaka",
+          "time": "6:30 PM",
+          "restaurant": "Tempura Endo Yasaka",
+          "dish": "Tempura omakase",
+          "notes": "Refined tempura counter in the Gion area. Book in advance on Tabelog or directly."
+        }
+      ]
+    },
+    {
+      "date": "2026-06-09",
+      "location": "Kyoto",
+      "notes": "Day trip to Nara: Todai-ji Great Buddha, freely roaming sacred deer, Kasugataisha Shrine, and the Naramachi preserved merchant district.",
+      "accommodation": {
+        "name": "Hotel Kanra Kyoto — Suite Main Building",
+        "url": "https://www.uds-hotels.com/en/kanra/kyoto/",
+        "confirmation": "#2351074222"
+      },
+      "activities": [
+        {
+          "id": "kyo-kintetsu-to-nara",
+          "time": "8:30 AM",
+          "name": "Kintetsu Limited Express: Kyoto → Nara",
+          "description": "From Kintetsu Kyoto Station directly to Kintetsu Nara (~45 min). Buy tickets in advance."
+        },
+        {
+          "id": "kyo-todaiji",
+          "time": "9:30 AM",
+          "name": "Tōdai-ji & Nara Park Deer",
+          "description": "The Great Buddha Hall — largest wooden building in the world, housing a 15-meter bronze Buddha. Sacred deer roam freely in Nara Park. Also visit Kōfuku-ji and its five-story pagoda.",
+          "url": "https://www.todaiji.or.jp/english/"
+        },
+        {
+          "id": "kyo-nakatanidou",
+          "time": "11:00 AM",
+          "name": "Nakatanidou Mochi Pounding",
+          "description": "High-speed mochi pounding demonstration on Sanjo Dori. Eat warm yomogi mochi right on the spot."
+        },
+        {
+          "id": "kyo-kasugataisha",
+          "time": "1:00 PM",
+          "name": "Kasugataisha Shrine",
+          "description": "One of Japan's most sacred Shinto sites, lined with roughly 3,000 stone and bronze lanterns along forest paths. Loop back through Naramachi's preserved merchant district."
+        },
+        {
+          "id": "kyo-salon-naramachi",
+          "time": "3:00 PM",
+          "name": "Salon Naramachi Cafe",
+          "description": "Tea in the preserved old merchant district. Also stop at Maedano Donut for celebrated inventive donuts."
+        }
+      ],
+      "meals": [
+        {
+          "id": "kyo-nara-lunch",
+          "time": "12:00 PM",
+          "restaurant": "Naramachi area lunch",
+          "notes": "Browse the Naramachi district cafes and snack stalls for a light lunch between Kasugataisha and the afternoon tea."
+        },
+        {
+          "id": "kyo-ginjo-ramen-kubota",
+          "time": "7:00 PM",
+          "restaurant": "Ginjo Ramen Kubota",
+          "dish": "Ramen",
+          "notes": "Casual ramen dinner back in Kyoto after the Nara day trip."
+        }
+      ]
+    },
+    {
+      "date": "2026-06-10",
+      "location": "Kyoto",
+      "notes": "Osaka day trip: Tower Knives for Sakai blades, Kuromon Ichiba market, Dotonbori street food, Shinsaibashi shopping, and a special wagyu farewell dinner at Steak Ron.",
+      "accommodation": {
+        "name": "Hotel Kanra Kyoto — Suite Main Building",
+        "url": "https://www.uds-hotels.com/en/kanra/kyoto/",
+        "confirmation": "#2351074222"
+      },
+      "activities": [
+        {
+          "id": "kyo-osaka-day-trip",
+          "time": "9:30 AM",
+          "name": "Travel to Osaka",
+          "description": "JR Tokaido Line from Kyoto Station to Osaka Station (~28 min) or Hankyu Limited Express from Kyoto-Kawaramachi (~42 min)."
+        },
+        {
+          "id": "kyo-tower-knives",
+          "time": "10:00 AM",
+          "name": "Tower Knives Osaka",
+          "description": "Specialist knife shop in Shinsekai carrying Sakai-made blades. Multilingual staff, duty-free with passport, test knives before buying, name engraving available.",
+          "url": "https://www.tower-knives.jp"
+        },
+        {
+          "id": "kyo-kuromon-ichiba",
+          "time": "11:00 AM",
+          "name": "Kuromon Ichiba Market & Namba Yasaka Shrine",
+          "description": "Osaka's famous covered market with fresh fish, grilled skewers, and street food. Walk to Namba Yasaka Shrine to see the extraordinary giant lion-head stage."
+        },
+        {
+          "id": "kyo-dotonbori",
+          "time": "12:30 PM",
+          "name": "Dotonbori & Namba",
+          "description": "Takoyaki at Wanaka or Aizuya, then dumplings at Chao Chao Gyoza. Keep it light — save appetite for Steak Ron."
+        },
+        {
+          "id": "kyo-shinsaibashi",
+          "time": "2:30 PM",
+          "name": "Shinsaibashi & Amerikamura",
+          "description": "Walk the centuries-old covered Shinsaibashi-suji arcade, then wander into Amerikamura for vintage stores, street art, and independent cafes."
+        }
+      ],
+      "meals": [
+        {
+          "id": "kyo-steak-ron",
+          "time": "5:30 PM",
+          "restaurant": "Steak Ron",
+          "dish": "A5 wagyu",
+          "notes": "The most special dinner of the trip — a proper farewell to Japan. Counter seats and open kitchen. Reservation number: Q5HTXRSNH8.",
+          "url": "https://steak-ron.com"
+        }
+      ]
+    },
+    {
+      "date": "2026-06-11",
+      "location": "Kyoto / Hong Kong",
+      "notes": "Early Kiyomizudera at dawn, Nishiki Market browse, check out by 11:30am, Haruka express to KIX, CX 507 to Hong Kong (arrives 8:50pm). Final night at Skycity Marriott.",
+      "accommodation": {
+        "name": "Skycity Marriott Hong Kong",
+        "url": "https://www.marriott.com/en-us/hotels/hkgap-hong-kong-skycity-marriott-hotel/overview/",
+        "confirmation": "#90411237"
+      },
+      "activities": [
+        {
+          "id": "kyo-kiyomizudera",
+          "time": "6:00 AM",
+          "name": "Kiyomizudera Temple",
+          "description": "Opens at 6am and nearly deserted in early morning — the wooden stage over the waking city is breathtaking. Walk down through Ninenzaka and Sannenzaka stone-paved lanes on the way back.",
+          "url": "https://www.kiyomizudera.or.jp/en/"
+        },
+        {
+          "id": "kyo-nishiki-market",
+          "time": "10:00 AM",
+          "name": "Nishiki Market",
+          "description": "Kyoto's narrow covered food market — graze through pickles, tofu, wagashi sweets, and edible souvenirs. Most stalls open by 10am."
+        },
+        {
+          "id": "kyo-haruka-to-kix",
+          "time": "12:15 PM",
+          "name": "Haruka Limited Express: Kyoto → KIX",
+          "description": "From Kyoto Station, arriving Kansai International Airport ~1:30pm. CX 507 departs 5:35pm. Seat reservation required."
+        },
+        {
+          "id": "hk-skycity-arrival",
+          "time": "8:50 PM",
+          "name": "Arrive Hong Kong (CX 507)",
+          "description": "Skycity Marriott is directly connected to Terminal 1 — seamless final-night check-in."
+        }
+      ],
+      "meals": []
+    },
+    {
+      "date": "2026-06-12",
+      "location": "Hong Kong",
+      "notes": "CX 806 departs 12:10pm Hong Kong, arrives Chicago O'Hare 1:55pm. Journey complete.",
+      "activities": [
+        {
+          "id": "hk-fly-home",
+          "time": "12:10 PM",
+          "name": "Fly Home — CX 806 HKG → ORD",
+          "description": "CX 806 departs Hong Kong 12:10pm, arrives Chicago O'Hare 1:55pm."
+        }
+      ],
+      "meals": []
+    }
+  ],
+  "pre_trip_input": []
+}
