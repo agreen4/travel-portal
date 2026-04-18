@@ -1,17 +1,41 @@
 ---
+// src/pages/index.astro
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TripCard from '../components/TripCard.astro';
 
+const allTrips = await getCollection('trips', ({ data }) => data.visibility === 'public');
+const today = new Date();
+
+const upcoming = allTrips
+  .filter(t => t.data.date_start >= today)
+  .sort((a, b) => a.data.date_start.getTime() - b.data.date_start.getTime());
+
+const past = allTrips
+  .filter(t => t.data.date_start < today)
+  .sort((a, b) => b.data.date_start.getTime() - a.data.date_start.getTime());
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Travel">
+  {upcoming.length > 0 && (
+    <section>
+      <h2 class="section-heading">Upcoming</h2>
+      <div class="card-grid">
+        {upcoming.map(trip => <TripCard {trip} />)}
+      </div>
+    </section>
+  )}
+
+  {past.length > 0 && (
+    <section>
+      <h2 class="section-heading">Past Trips</h2>
+      <div class="card-grid">
+        {past.map(trip => <TripCard {trip} />)}
+      </div>
+    </section>
+  )}
+
+  {allTrips.length === 0 && (
+    <p style="color: var(--text-muted); font-style: italic;">No trips yet.</p>
+  )}
+</BaseLayout>
