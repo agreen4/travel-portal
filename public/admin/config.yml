@@ -1,0 +1,73 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: trips
+    label: Trips
+    folder: src/content/trips
+    create: true
+    extension: json
+    format: json
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - label: Visibility
+        name: visibility
+        widget: select
+        options: [public, unlisted, private]
+      - { label: Destinations, name: destinations, widget: list }
+      - { label: Start Date, name: date_start, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: End Date, name: date_end, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: Cover Photo, name: cover_photo, widget: string }
+      - { label: Description, name: description, widget: text }
+      - label: Days
+        name: days
+        widget: list
+        fields:
+          - { label: Date, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+          - { label: Location, name: location, widget: string }
+          - { label: Notes, name: notes, widget: text, required: false }
+          - label: Accommodation
+            name: accommodation
+            widget: object
+            required: false
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: URL, name: url, widget: string, required: false }
+              - { label: Confirmation, name: confirmation, widget: string, required: false }
+          - label: Activities
+            name: activities
+            widget: list
+            default: []
+            fields:
+              - { label: ID, name: id, widget: string }
+              - { label: Time, name: time, widget: string, required: false }
+              - { label: Name, name: name, widget: string }
+              - { label: Description, name: description, widget: text, required: false }
+              - { label: URL, name: url, widget: string, required: false }
+              - { label: Photo URL, name: photo, widget: string, required: false }
+          - label: Meals
+            name: meals
+            widget: list
+            default: []
+            fields:
+              - { label: ID, name: id, widget: string }
+              - { label: Time, name: time, widget: string, required: false }
+              - { label: Restaurant, name: restaurant, widget: string }
+              - { label: Dish, name: dish, widget: string, required: false }
+              - { label: Notes, name: notes, widget: text, required: false }
+              - { label: URL, name: url, widget: string, required: false }
+      - label: Pre-Trip Input (Approved)
+        name: pre_trip_input
+        widget: list
+        default: []
+        required: false
+        fields:
+          - { label: Activity ID, name: activity_id, widget: string }
+          - { label: Author, name: author, widget: string }
+          - { label: Note, name: note, widget: text }
+          - { label: URL, name: url, widget: string, required: false }
