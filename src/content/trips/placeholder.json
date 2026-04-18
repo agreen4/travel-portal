@@ -1,0 +1,23 @@
+{
+  "title": "Test Trip",
+  "visibility": "unlisted",
+  "destinations": ["Tokyo"],
+  "date_start": "2026-05-25",
+  "date_end": "2026-06-01",
+  "cover_photo": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800",
+  "description": "A placeholder trip for development.",
+  "days": [
+    {
+      "date": "2026-05-25",
+      "location": "Tokyo",
+      "accommodation": { "name": "Test Hotel", "url": "", "confirmation": "ABC123" },
+      "activities": [
+        { "id": "act-1", "time": "9:00am", "name": "Tsukiji Market", "description": "Morning market walk." }
+      ],
+      "meals": [
+        { "id": "meal-1", "time": "12:00pm", "restaurant": "Sushi Saito", "dish": "Omakase", "notes": "Reserve 3 months ahead." }
+      ]
+    }
+  ],
+  "pre_trip_input": []
+}
