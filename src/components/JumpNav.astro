@@ -1,0 +1,48 @@
+---
+// src/components/JumpNav.astro
+interface Day { date: Date; location: string; }
+interface Props { days: Day[]; }
+const { days } = Astro.props;
+
+// Build unique city anchors in order
+const anchors: { id: string; label: string }[] = [];
+const seen = new Set<string>();
+for (const day of days) {
+  const id = day.location.toLowerCase().replace(/\s+/g, '-');
+  if (!seen.has(id)) {
+    seen.add(id);
+    anchors.push({ id, label: day.location });
+  }
+}
+---
+
+<nav class="jump-nav" aria-label="Jump to city">
+  {anchors.map(a => (
+    <a href={`#${a.id}`} class="jump-nav__link">{a.label}</a>
+  ))}
+</nav>
+
+<style>
+  .jump-nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.6rem 0;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .jump-nav::-webkit-scrollbar { display: none; }
+  .jump-nav__link {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    color: var(--text-muted);
+  }
+  .jump-nav__link:hover { color: var(--text); text-decoration: none; }
+</style>
