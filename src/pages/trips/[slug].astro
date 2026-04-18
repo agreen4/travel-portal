@@ -1,0 +1,56 @@
+---
+// src/pages/trips/[slug].astro
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TripHero from '../../components/TripHero.astro';
+import TripStats from '../../components/TripStats.astro';
+import JumpNav from '../../components/JumpNav.astro';
+import TimelineDay from '../../components/TimelineDay.astro';
+import SidePanel from '../../components/SidePanel.astro';
+
+export async function getStaticPaths() {
+  const trips = await getCollection('trips', ({ data }) => data.visibility !== 'private');
+  return trips.map(trip => ({
+    params: { slug: trip.id },
+    props: { trip },
+  }));
+}
+
+const { trip } = Astro.props;
+const { title, description, visibility, days, pre_trip_input, cover_photo, destinations, date_start, date_end } = trip.data;
+
+// suggestMode is always false at build time for static output.
+// Task 15 will add client-side JS to detect ?suggest=true and activate the panel.
+const suggestMode = false;
+const noindex = visibility === 'unlisted';
+const isPrivate = visibility === 'private';
+const showPanel = pre_trip_input.length > 0;
+---
+
+<BaseLayout {title} {description} {noindex}>
+  <TripHero {title} {description} {cover_photo} {destinations} {date_start} {date_end} />
+  <TripStats {days} />
+  <JumpNav {days} />
+
+  <div class:list={['trip-body', showPanel && 'trip-body--suggest']}>
+    <div class="timeline">
+      {days.map(day => (
+        <TimelineDay
+          {day}
+          preInput={pre_trip_input}
+          suggestMode={false}
+          tripSlug={trip.id}
+          {isPrivate}
+        />
+      ))}
+    </div>
+
+    {showPanel && (
+      <SidePanel
+        preInput={pre_trip_input}
+        suggestMode={false}
+        tripSlug={trip.id}
+      />
+    )}
+  </div>
+</BaseLayout>
