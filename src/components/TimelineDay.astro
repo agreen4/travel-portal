@@ -20,11 +20,10 @@ interface PreInput { activity_id: string; author: string; note: string; url?: st
 interface Props {
   day: Day;
   preInput: PreInput[];
-  suggestMode: boolean;
   tripSlug: string;
   isPrivate: boolean;
 }
-const { day, preInput, suggestMode, tripSlug, isPrivate } = Astro.props;
+const { day, preInput, tripSlug, isPrivate } = Astro.props;
 const locationId = day.location.toLowerCase().replace(/\s+/g, '-');
 
 // Merge and sort activities + meals by time for display
@@ -61,8 +60,8 @@ const items = [
 
     {items.map(item =>
       item.type === 'activity'
-        ? <ActivityBlock {...item} {suggestMode} />
-        : <MealBlock {...item} {suggestMode} />
+        ? <ActivityBlock {...item} />
+        : <MealBlock {...item} />
     )}
   </div>
 </div>

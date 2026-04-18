@@ -36,7 +36,6 @@ const isPrivate = visibility === 'private';
         <TimelineDay
           {day}
           preInput={pre_trip_input}
-          suggestMode={false}
           tripSlug={trip.id}
           {isPrivate}
         />
@@ -45,7 +44,6 @@ const isPrivate = visibility === 'private';
 
     <SidePanel
       preInput={pre_trip_input}
-      suggestMode={false}
       tripSlug={trip.id}
     />
   </div>

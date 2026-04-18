@@ -6,12 +6,13 @@ const { tripSlug } = Astro.props;
 
 <form
   class="suggest-form"
-  name="trip-suggestions"
+  name="suggest"
+  action="/"
   method="POST"
   data-netlify="true"
   netlify-honeypot="bot-field"
 >
-  <input type="hidden" name="form-name" value="trip-suggestions" />
+  <input type="hidden" name="form-name" value="suggest" />
   <input type="hidden" name="trip_slug" value={tripSlug} />
   <input type="hidden" name="activity_id" id="suggest-activity-id" value="" />
   <p hidden><label>Don't fill this out: <input name="bot-field" /></label></p>
@@ -28,21 +29,32 @@ const { tripSlug } = Astro.props;
   <input class="suggest-form__input" id="suggest-url" name="url" type="url" placeholder="https://..." />
 
   <button class="suggest-form__submit" type="submit">Submit note</button>
-  <p class="suggest-form__success" hidden>Thanks — note submitted!</p>
+  <p class="suggest-form__success" role="status" aria-live="polite" hidden>Thanks — note submitted!</p>
+  <p class="suggest-form__error" role="alert" hidden>Something went wrong. Please try again.</p>
 </form>
 
 <script>
-  // Handle form submission feedback
   const form = document.querySelector('.suggest-form') as HTMLFormElement;
   const success = document.querySelector('.suggest-form__success') as HTMLElement;
+  const error = document.querySelector('.suggest-form__error') as HTMLElement;
+  let hideTimer: ReturnType<typeof setTimeout> | null = null;
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (hideTimer) clearTimeout(hideTimer);
       const data = new FormData(form);
-      await fetch('/', { method: 'POST', body: data });
-      form.reset();
-      success.hidden = false;
-      setTimeout(() => { success.hidden = true; }, 4000);
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: data });
+        if (!res.ok) throw new Error('Network error');
+        form.reset();
+        success.hidden = false;
+        error.hidden = true;
+        hideTimer = setTimeout(() => { success.hidden = true; }, 4000);
+      } catch {
+        error.hidden = false;
+        success.hidden = true;
+        hideTimer = setTimeout(() => { error.hidden = true; }, 4000);
+      }
     });
   }
 </script>
@@ -79,6 +91,7 @@ const { tripSlug } = Astro.props;
     font-size: 0.8rem;
     cursor: pointer;
   }
-  .suggest-form__submit:hover { opacity: 0.85; }
+  .suggest-form__submit:hover { background: var(--accent-hover); }
   .suggest-form__success { font-family: var(--font-sans); font-size: 0.8rem; color: green; text-align: center; }
+  .suggest-form__error { font-family: var(--font-sans); font-size: 0.8rem; color: #c0392b; text-align: center; }
 </style>

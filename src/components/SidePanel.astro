@@ -5,7 +5,6 @@ import SuggestForm from './SuggestForm.astro';
 interface PreInput { activity_id: string; author: string; note: string; url?: string; }
 interface Props {
   preInput: PreInput[];
-  suggestMode: boolean;
   tripSlug: string;
 }
 const { preInput, tripSlug } = Astro.props;
@@ -45,21 +44,20 @@ const notesByActivity = preInput.reduce<Record<string, PreInput[]>>((acc, item) 
 </aside>
 
 <script>
-  // Wire up suggest-trigger buttons to the side panel form
   const activityIdField = document.getElementById('suggest-activity-id') as HTMLInputElement;
   const contextLabel = document.getElementById('suggest-context') as HTMLElement;
 
-  document.querySelectorAll('.suggest-trigger').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.getAttribute('data-for') ?? '';
-      const name = btn.closest('[data-activity-id]')?.querySelector('.activity__name, .meal__name')?.textContent?.trim() ?? id;
-      activityIdField.value = id;
-      contextLabel.textContent = `Noting: ${name}`;
-
-      // Scroll panel into view on mobile
-      document.getElementById('side-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (activityIdField && contextLabel) {
+    document.querySelectorAll('.suggest-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-for') ?? '';
+        const name = btn.closest('[data-activity-id]')?.querySelector('.activity__name, .meal__name')?.textContent?.trim() ?? id;
+        activityIdField.value = id;
+        contextLabel.textContent = `Noting: ${name}`;
+        document.getElementById('side-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
     });
-  });
+  }
 </script>
 
 <style>
@@ -96,6 +94,6 @@ const notesByActivity = preInput.reduce<Record<string, PreInput[]>>((acc, item) 
   .note { margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
   .note:last-child { border-bottom: none; }
   .note__author { color: var(--accent); margin-bottom: 0.2rem; }
-  .note__text { color: var(--text); line-height: 1.4; margin-bottom: 0.2rem; }
+  .note__text { color: var(--text); line-height: 1.4; margin-bottom: 0.2rem; white-space: pre-wrap; }
   .note__link { color: var(--text-muted); }
 </style>

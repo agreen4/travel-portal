@@ -7,7 +7,6 @@ interface Props {
   description?: string;
   url?: string;
   photo?: string;
-  suggestMode?: boolean;
 }
 const { id, time, name, description, url, photo } = Astro.props;
 ---
@@ -21,7 +20,7 @@ const { id, time, name, description, url, photo } = Astro.props;
     }
     {description && <p class="activity__desc">{description}</p>}
     {photo && <img src={photo} alt={name} class="activity__photo" loading="lazy" />}
-    <button class="suggest-trigger label" data-for={id}>+ note</button>
+    <button class="suggest-trigger label" data-for={id} aria-label={`Add note about ${name}`}>+ note</button>
   </div>
 </div>
 

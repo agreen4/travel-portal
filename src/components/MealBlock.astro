@@ -7,7 +7,6 @@ interface Props {
   dish?: string;
   notes?: string;
   url?: string;
-  suggestMode?: boolean;
 }
 const { id, time, restaurant, dish, notes, url } = Astro.props;
 ---
@@ -15,7 +14,7 @@ const { id, time, restaurant, dish, notes, url } = Astro.props;
 <div class="meal" data-activity-id={id}>
   {time && <p class="meal__time label">{time}</p>}
   <div class="meal__content">
-    <p class="meal__icon">🍽</p>
+    <span class="meal__icon" aria-hidden="true">🍽</span>
     <div>
       {url
         ? <a href={url} target="_blank" rel="noopener" class="meal__name">{restaurant}</a>
@@ -23,7 +22,7 @@ const { id, time, restaurant, dish, notes, url } = Astro.props;
       }
       {dish && <p class="meal__dish">{dish}</p>}
       {notes && <p class="meal__notes">{notes}</p>}
-      <button class="suggest-trigger label" data-for={id}>+ note</button>
+      <button class="suggest-trigger label" data-for={id} aria-label={`Add note about ${restaurant}`}>+ note</button>
     </div>
   </div>
 </div>
