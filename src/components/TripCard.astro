@@ -1,0 +1,44 @@
+---
+// src/components/TripCard.astro
+import type { CollectionEntry } from 'astro:content';
+import { formatYear } from '../utils/format-date';
+
+interface Props { trip: CollectionEntry<'trips'>; }
+const { trip } = Astro.props;
+const { title, destinations, date_start, date_end, cover_photo } = trip.data;
+const nights = Math.round((date_end.getTime() - date_start.getTime()) / 864e5);
+---
+
+<a href={`/trips/${trip.id}/`} class="trip-card">
+  <div
+    class="trip-card__image"
+    style={`background-image: url(${cover_photo})`}
+    role="img"
+    aria-label={title}
+  ></div>
+  <div class="trip-card__body">
+    <p class="label">{formatYear(date_start)}</p>
+    <h2 class="trip-card__title">{title}</h2>
+    <p class="trip-card__meta">{destinations.join(' · ')} · {nights} nights</p>
+  </div>
+</a>
+
+<style>
+  .trip-card {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    transition: box-shadow 0.15s;
+  }
+  .trip-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); text-decoration: none; }
+  .trip-card__image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--border);
+  }
+  .trip-card__body { padding: 1rem 1.25rem 1.25rem; }
+  .trip-card__title { font-size: 1.2rem; margin: 0.25rem 0; }
+  .trip-card__meta { font-family: var(--font-sans); font-size: 0.8rem; color: var(--text-muted); }
+</style>
