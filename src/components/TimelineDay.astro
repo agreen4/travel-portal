@@ -1,0 +1,100 @@
+---
+// src/components/TimelineDay.astro
+import { formatDay } from '../utils/format-date';
+import ActivityBlock from './ActivityBlock.astro';
+import MealBlock from './MealBlock.astro';
+
+interface Activity { id: string; time?: string; name: string; description?: string; url?: string; photo?: string; }
+interface Meal { id: string; time?: string; restaurant: string; dish?: string; notes?: string; url?: string; }
+interface Accommodation { name: string; url?: string; confirmation?: string; }
+interface Day {
+  date: Date;
+  location: string;
+  notes?: string;
+  accommodation?: Accommodation;
+  activities: Activity[];
+  meals: Meal[];
+}
+interface PreInput { activity_id: string; author: string; note: string; url?: string; }
+
+interface Props {
+  day: Day;
+  preInput: PreInput[];
+  suggestMode: boolean;
+  tripSlug: string;
+  isPrivate: boolean;
+}
+const { day, preInput, suggestMode, tripSlug, isPrivate } = Astro.props;
+const locationId = day.location.toLowerCase().replace(/\s+/g, '-');
+
+// Merge and sort activities + meals by time for display
+const items = [
+  ...day.activities.map(a => ({ ...a, type: 'activity' as const })),
+  ...day.meals.map(m => ({ ...m, type: 'meal' as const })),
+].sort((a, b) => (a.time ?? '').localeCompare(b.time ?? ''));
+---
+
+<div class="day" id={locationId}>
+  <div class="day__node">
+    <div class="day__dot"></div>
+  </div>
+  <div class="day__content">
+    <div class="day__header">
+      <p class="label day__date">{formatDay(day.date)}</p>
+      <h2 class="day__location">{day.location}</h2>
+    </div>
+
+    {day.notes && <p class="day__notes">{day.notes}</p>}
+
+    {day.accommodation && (
+      <div class="accommodation">
+        <span class="label">🏨 </span>
+        {day.accommodation.url
+          ? <a href={day.accommodation.url} target="_blank" rel="noopener">{day.accommodation.name}</a>
+          : <span>{day.accommodation.name}</span>
+        }
+        {isPrivate && day.accommodation.confirmation && (
+          <span class="accommodation__conf label"> · {day.accommodation.confirmation}</span>
+        )}
+      </div>
+    )}
+
+    {items.map(item =>
+      item.type === 'activity'
+        ? <ActivityBlock {...item} {suggestMode} />
+        : <MealBlock {...item} {suggestMode} />
+    )}
+  </div>
+</div>
+
+<style>
+  .day {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+  .day__node { display: flex; flex-direction: column; align-items: center; }
+  .day__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 1px var(--accent);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .day__content { padding-bottom: 1rem; }
+  .day__date { margin-bottom: 0.2rem; }
+  .day__location { margin-bottom: 0.75rem; font-size: 1.25rem; }
+  .day__notes { font-style: italic; color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; }
+  .accommodation {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+  }
+  .accommodation__conf { color: var(--text-light); }
+</style>
