@@ -53,7 +53,7 @@
           "id": "hk-ozone-bar",
           "time": "6:00 PM",
           "name": "Ozone Bar — Ritz-Carlton ICC",
-          "description": "World's highest bar at the Ritz-Carlton ICC Tower. Golden hour and harbour sunset views. Smart casual; children under 12 allowed before 9pm. Confirmation: HKGKW-6ZPDX34SFV5D.",
+          "description": "World's highest bar at the Ritz-Carlton ICC Tower. Golden hour and harbour sunset views. Smart casual; children under 12 allowed before 9pm.",
           "url": "https://www.ritzcarlton.com/en/hotels/china/hong-kong/dining/ozone"
         },
         {
@@ -69,7 +69,7 @@
           "time": "11:00 AM",
           "restaurant": "Yat Tung Heen",
           "dish": "Traditional Cantonese dim sum",
-          "notes": "Michelin one-star at the Eaton Hotel, Jordan. Traditional Cantonese dim sum since 1990. Confirmation: #73HUHAZSBJBA.",
+          "notes": "Michelin one-star at the Eaton Hotel, Jordan. Traditional Cantonese dim sum since 1990.",
           "url": "https://www.eatonhk.com/dining/yat-tung-heen/"
         },
         {
@@ -335,7 +335,7 @@
           "id": "tok-disneysea",
           "time": "9:00 AM",
           "name": "Tokyo DisneySea",
-          "description": "Reservation A00555726363. Priority: Fantasy Springs (Frozen/Tangled/Peter Pan), Journey to the Center of the Earth, Tower of Terror. Buy Disney Premier Access for Frozen immediately after entry.",
+          "description": "Priority: Fantasy Springs (Frozen/Tangled/Peter Pan), Journey to the Center of the Earth, Tower of Terror. Buy Disney Premier Access for Frozen immediately after entry.",
           "url": "https://www.tokyodisneyresort.jp/en/tds/"
         }
       ],
@@ -728,7 +728,7 @@
           "time": "5:30 PM",
           "restaurant": "Steak Ron",
           "dish": "A5 wagyu",
-          "notes": "The most special dinner of the trip — a proper farewell to Japan. Counter seats and open kitchen. Reservation number: Q5HTXRSNH8.",
+          "notes": "The most special dinner of the trip — a proper farewell to Japan. Counter seats and open kitchen.",
           "url": "https://steak-ron.com"
         }
       ]
