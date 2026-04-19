@@ -1,11 +1,16 @@
 {
-  "title": "Hong Kong & Japan — May/June 2026",
-  "visibility": "unlisted",
-  "destinations": ["Hong Kong", "Tokyo", "Atami", "Hiroshima", "Kyoto"],
-  "date_start": "2026-05-25",
+  "destinations": [
+    "Hong Kong",
+    "Tokyo",
+    "Atami",
+    "Hiroshima",
+    "Kyoto"
+  ],
   "date_end": "2026-06-12",
-  "cover_photo": "",
-  "description": "Three weeks across Hong Kong, Tokyo, Atami, Hiroshima, and Kyoto — Michelin dim sum, ryokan onsen, DisneySea, the Peace Memorial Museum, and a farewell wagyu dinner in Osaka.",
+  "cover_photo": "https://unsplash.com/photos/pagoda-surrounded-by-trees-E_eWwM29wfU",
+  "pre_trip_input": [],
+  "date_start": "2026-05-25",
+  "visibility": "unlisted",
   "days": [
     {
       "date": "2026-05-26",
@@ -783,8 +788,12 @@
           "description": "CX 806 departs Hong Kong 12:10pm, arrives Chicago O'Hare 1:55pm."
         }
       ],
-      "meals": []
+      "meals": [],
+      "accommodation": {
+        "name": " "
+      }
     }
   ],
-  "pre_trip_input": []
+  "title": "Hong Kong & Japan — May/June 2026",
+  "description": "Three weeks across Hong Kong, Tokyo, Atami, Hiroshima, and Kyoto — Michelin dim sum, ryokan onsen, DisneySea, the Peace Memorial Museum, and a farewell wagyu dinner in Osaka."
 }
