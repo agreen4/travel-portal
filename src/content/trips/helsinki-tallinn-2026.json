@@ -1,11 +1,13 @@
 {
-  "title": "Helsinki & Tallinn — June 24–July 4, 2026",
-  "visibility": "unlisted",
-  "destinations": ["Helsinki", "Tallinn"],
-  "date_start": "2026-06-24",
+  "destinations": [
+    "Helsinki",
+    "Tallinn"
+  ],
   "date_end": "2026-07-04",
-  "cover_photo": "",
-  "description": "An 11-day solo trip combining three days of photography-focused exploration in Tallinn's Old Town, four days at WPSC 2026 at Aalto University in Otaniemi, and a Helsinki free day around the Suomenlinna sea fortress.",
+  "cover_photo": "https://www.exoticca.com/_next/image?url=https%3A%2F%2Fuploads.exoticca.com%2Fglobal%2Fdestination%2Fpoi%2Fhelsinki.png&w=1920&q=75",
+  "pre_trip_input": [],
+  "date_start": "2026-06-24",
+  "visibility": "unlisted",
   "days": [
     {
       "date": "2026-06-24",
@@ -25,7 +27,10 @@
           "description": "AA 777, seat 14J. Overnight transatlantic with dinner and breakfast served."
         }
       ],
-      "meals": []
+      "meals": [],
+      "accommodation": {
+        "name": " "
+      }
     },
     {
       "date": "2026-06-25",
@@ -414,5 +419,6 @@
       ]
     }
   ],
-  "pre_trip_input": []
+  "title": "Helsinki & Tallinn — June 24–July 4, 2026",
+  "description": "An 11-day solo trip combining three days of photography-focused exploration in Tallinn's Old Town, four days at WPSC 2026 at Aalto University in Otaniemi, and a Helsinki free day around the Suomenlinna sea fortress."
 }
