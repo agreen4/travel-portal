@@ -10,7 +10,7 @@
   "cover_photo": "https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt0db69fde9a0f6d98/675e125faf051ba02b13ded4/japan-725347-Header_Desktop.jpg?fit=crop&disable=upscale&auto=webp&quality=60&crop=smart&width=1920&height=1080",
   "pre_trip_input": [],
   "date_start": "2026-05-25",
-  "visibility": "unlisted",
+  "visibility": "public",
   "days": [
     {
       "date": "2026-05-26",
