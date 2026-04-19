@@ -26,11 +26,25 @@ interface Props {
 const { day, preInput, tripSlug, isPrivate } = Astro.props;
 const locationId = day.location.toLowerCase().replace(/\s+/g, '-');
 
+// Parse "9:00 PM" / "11:00 AM" / "14:30" style times to minutes for sorting
+function parseTime(t: string | undefined): number {
+  if (!t) return Infinity;
+  const upper = t.toUpperCase();
+  const pm = upper.includes('PM');
+  const am = upper.includes('AM');
+  const cleaned = upper.replace(/[APM\s]/g, '');
+  const [h, m = '0'] = cleaned.split(':');
+  let hours = parseInt(h, 10);
+  if (pm && hours !== 12) hours += 12;
+  if (am && hours === 12) hours = 0;
+  return hours * 60 + parseInt(m, 10);
+}
+
 // Merge and sort activities + meals by time for display
 const items = [
   ...day.activities.map(a => ({ ...a, type: 'activity' as const })),
   ...day.meals.map(m => ({ ...m, type: 'meal' as const })),
-].sort((a, b) => (a.time ?? '').localeCompare(b.time ?? ''));
+].sort((a, b) => parseTime(a.time) - parseTime(b.time));
 ---
 
 <div class="day" id={locationId}>
