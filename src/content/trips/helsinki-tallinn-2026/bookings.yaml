@@ -1,0 +1,109 @@
+flights:
+  - id: aa-3477-outbound
+    flight: AA 3477
+    route: CMI → ORD
+    date: "2026-06-24"
+    departs: "6:44 PM"
+    arrives: "8:14 PM"
+    seat: 11D
+  - id: aa-150-transatlantic
+    flight: AA 150
+    route: ORD → CDG
+    date: "2026-06-24"
+    departs: "9:35 PM"
+    arrives: "12:40 PM (Jun 25)"
+    seat: 14J
+  - id: ay-1576-cdg-hel
+    flight: AY 1576
+    route: CDG → HEL
+    date: "2026-06-25"
+    departs: "3:05 PM"
+    arrives: "7:00 PM"
+  - id: aa-8987-return
+    flight: AA 8987
+    route: HEL → ORD
+    date: "2026-07-04"
+    departs: "4:25 PM"
+    arrives: "5:50 PM CDT"
+    notes: Operated by Finnair
+  - id: aa-3694-home
+    flight: AA 3694
+    route: ORD → CMI
+    date: "2026-07-04"
+    departs: "7:55 PM"
+    arrives: "9:04 PM"
+    seat: 11D
+    notes: Often delayed 30+ min
+
+hotels:
+  - id: hel-klaus-k
+    name: Klaus K
+    location: Helsinki
+    address: Bulevardi 2-4
+    check_in: "2026-06-25"
+    check_out: "2026-06-26"
+    confirmation: 10793SF233612
+    url: https://www.klauskhotel.com
+  - id: tll-telegraaf
+    name: Hotel Telegraaf (Autograph Collection)
+    location: Tallinn
+    address: Vene 9
+    check_in: "2026-06-26"
+    check_out: "2026-06-29"
+    confirmation: "94459665"
+    url: https://www.marriott.com/en-us/hotels/tllak-hotel-telegraaf-autograph-collection/overview/
+  - id: hel-scandic-grand-central
+    name: Scandic Grand Central Helsinki
+    location: Helsinki
+    check_in: "2026-06-29"
+    check_out: "2026-07-04"
+    confirmation: "1206182638"
+    url: https://www.scandichotels.com/en/hotels/scandic-grand-central-helsinki
+
+ferries:
+  - id: ferry-hel-tll
+    name: Tallink Ferry HEL → TLL
+    date: "2026-06-26"
+    departs: "10:30 AM"
+    arrives: "12:30 PM"
+    booking: "74666683"
+    security_code: "1077"
+    terminal_hel: "Länsiterminaali (West Harbour)"
+    url: https://myjourney.tallink.com
+  - id: ferry-tll-hel
+    name: Tallink Ferry TLL → HEL
+    date: "2026-06-29"
+    departs: "7:30 AM"
+    arrives: "9:30 AM"
+    booking: "74666683"
+    security_code: "1077"
+    terminal_tll: "D-Terminal, Lootsi 13"
+
+restaurants:
+  - id: tll-rataskaevu-16
+    restaurant: Rataskaevu 16
+    date: "2026-06-26"
+    time: "6:00 PM"
+    confirmation: Booked
+    url: https://www.rataskaevu16.ee/restaurants
+  - id: tll-noa-chefs-hall
+    restaurant: "Noa Chef's Hall"
+    date: "2026-06-27"
+    time: "6:00 PM"
+    confirmation: "ID 60714384"
+    url: https://nch.ee
+  - id: hel-finnjavel-salonki
+    restaurant: "Finnjävel Salonki"
+    date: "2026-06-30"
+    time: "Evening"
+    confirmation: "[ ] Book at finnjavel.fi"
+    url: https://finnjavel.fi
+  - id: hel-demo
+    restaurant: Demo
+    date: "2026-07-03"
+    time: "Evening"
+    confirmation: "[ ] Book at demohelsinki.fi"
+    url: https://demohelsinki.fi
+
+activities: []
+rail: []

@@ -1,0 +1,170 @@
+flights:
+  - id: cx-801
+    flight: CX 801
+    route: "Chicago O'Hare → Hong Kong"
+    date: "2026-05-25"
+    departs: "4:15 PM"
+    arrives: "9:00 PM (May 26)"
+  - id: cx-520
+    flight: CX 520
+    route: Hong Kong → Tokyo Narita
+    date: "2026-05-29"
+    departs: "10:40 AM"
+    arrives: "4:05 PM"
+  - id: cx-507
+    flight: CX 507
+    route: Osaka Kansai (KIX) → Hong Kong
+    date: "2026-06-11"
+    departs: "5:35 PM"
+    arrives: "8:50 PM"
+  - id: cx-806
+    flight: CX 806
+    route: "Hong Kong → Chicago O'Hare"
+    date: "2026-06-12"
+    departs: "12:10 PM"
+    arrives: "1:55 PM"
+
+hotels:
+  - id: hk-hotel-icon
+    name: Hotel ICON — 80 Suite King
+    location: Hong Kong
+    check_in: "2026-05-26"
+    check_out: "2026-05-29"
+    confirmation: "#51197SF673858"
+    url: https://www.hotel-icon.com
+  - id: tokyo-andhere-ueno
+    name: "&Here Tokyo Ueno — Deluxe Family (Takumi)"
+    location: Tokyo
+    check_in: "2026-05-29"
+    check_out: "2026-06-03"
+    confirmation: "Itinerary #73326675999672"
+    url: https://andherehotels.jp/tokyoueno/en/
+  - id: atami-sekaie
+    name: "Atami Sekaie — Ocean View Suite Tsuki no Michi"
+    location: Atami
+    check_in: "2026-06-03"
+    check_out: "2026-06-04"
+    confirmation: "#3227-2490-4521"
+    url: https://www.atamisekaie.jp/en/
+  - id: hiroshima-sheraton
+    name: "Sheraton Grand Hiroshima — King Bed, Club Lounge"
+    location: Hiroshima
+    check_in: "2026-06-04"
+    check_out: "2026-06-07"
+    confirmation: "#81521547"
+    url: https://www.marriott.com/en-us/hotels/hijsi-sheraton-grand-hiroshima-hotel/overview/
+  - id: kyoto-kanra
+    name: Hotel Kanra Kyoto — Suite Main Building
+    location: Kyoto
+    check_in: "2026-06-07"
+    check_out: "2026-06-11"
+    confirmation: "#2351074222"
+    url: https://www.uds-hotels.com/en/kanra/kyoto/
+    notes: "222,845 Chase UR Points"
+  - id: hk-skycity-marriott
+    name: Skycity Marriott Hong Kong
+    location: "Hong Kong (Airport)"
+    check_in: "2026-06-11"
+    check_out: "2026-06-12"
+    confirmation: "#90411237"
+    url: https://www.marriott.com/en-us/hotels/hkgap-hong-kong-skycity-marriott-hotel/overview/
+
+activities:
+  - id: hk-ngong-ping
+    name: Ngong Ping 360 Cable Car
+    date: "2026-05-27"
+    confirmation: "Klook #VAN560674"
+    url: https://www.np360.com.hk
+  - id: tokyo-teamlab
+    name: teamLab Borderless
+    date: "2026-06-01"
+    confirmation: "AKLYCXFM4YLM-0001"
+    url: https://borderless.teamlab.art
+  - id: tokyo-disneysea
+    name: Tokyo DisneySea
+    date: "2026-06-02"
+    confirmation: A00555726363
+    url: https://www.tokyodisneyresort.jp/en/tds/
+  - id: yokohama-cup-noodles-museum
+    name: Cup Noodles Museum — Admission
+    date: "2026-05-31"
+    confirmation: "#35212137"
+    url: https://www.cupnoodles-museum.jp/en/yokohama/
+  - id: yokohama-chicken-ramen-factory
+    name: Cup Noodles Museum — Chicken Ramen Factory
+    date: "2026-05-31"
+    time: "2:00 PM"
+    confirmation: "#c126053118917"
+  - id: hiroshima-carp-baseball
+    name: Hiroshima Carp Baseball
+    date: "2026-06-04"
+    confirmation: "Klook #XYG665557"
+    notes: "3 Infield Seats Second Floor"
+
+restaurants:
+  - id: hk-ozone-bar
+    restaurant: Ozone Bar — Ritz-Carlton ICC
+    date: "2026-05-27"
+    time: "6:00 PM"
+    confirmation: HKGKW-6ZPDX34SFV5D
+    url: https://www.ritzcarlton.com/en/hotels/china/hong-kong/dining/ozone
+  - id: hk-yat-tung-heen
+    restaurant: Yat Tung Heen
+    date: "2026-05-27"
+    time: "11:00 AM"
+    confirmation: "#73HUHAZSBJBA"
+  - id: hk-above-and-beyond
+    restaurant: "Above & Beyond — Hotel ICON"
+    date: "2026-05-28"
+    time: "7:00 PM"
+    confirmation: "Booked"
+    url: https://www.hotel-icon.com/dining/above-beyond
+  - id: tokyo-sadogashima
+    restaurant: "佐渡島へ渡れ (Sadogashima e Watare)"
+    date: "2026-05-29"
+    time: "7:00 PM"
+    confirmation: 4ZLM2432GQ
+  - id: tokyo-ushihachi
+    restaurant: Ueno Wagyu Yakiniku USHIHACHI Goku
+    date: "2026-05-30"
+    time: "6:15 PM"
+    confirmation: 2VGZSXF8MV
+  - id: osaka-steak-ron
+    restaurant: Steak Ron
+    date: "2026-06-10"
+    time: "5:30 PM"
+    confirmation: Q5HTXRSNH8
+
+rail:
+  - id: rail-nrt-ueno
+    name: Keisei Skyliner (Narita → Ueno)
+    date: "2026-05-29"
+    cost_jpy: 2470
+  - id: rail-tokyo-atami
+    name: Tokaido Shinkansen (Tokyo → Atami)
+    date: "2026-06-03"
+    target_departure: "~11:30 AM"
+    book_from: "2026-05-03"
+    url: https://smart-ex.jp/en/
+  - id: rail-atami-hiroshima
+    name: "Shinkansen: Atami → Shin-Osaka → Hiroshima (Hikari + Sakura)"
+    date: "2026-06-04"
+    target_departure: "~11:43 AM"
+    book_from: "2026-05-04"
+    url: https://smart-ex.jp/en/
+  - id: rail-hiroshima-kyoto
+    name: Nozomi Shinkansen (Hiroshima → Kyoto)
+    date: "2026-06-07"
+    book_from: "2026-05-07"
+    url: https://smart-ex.jp/en/
+  - id: rail-kyoto-nara
+    name: Kintetsu Limited Express (Kyoto → Nara, return)
+    date: "2026-06-09"
+    book_from: "2026-05-09"
+    url: https://www.kintetsu.co.jp/
+  - id: rail-kyoto-kix
+    name: Haruka Limited Express (Kyoto → KIX) — SEAT REQUIRED
+    date: "2026-06-11"
+    departure: "12:15 PM"
+    book_from: "2026-05-11"
+    url: https://smart-ex.jp/en/
