@@ -1,6 +1,6 @@
 ---
 // src/pages/trips/[slug].astro
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TripHero from '../../components/TripHero.astro';
 import TripStats from '../../components/TripStats.astro';
@@ -11,51 +11,65 @@ import SidePanel from '../../components/SidePanel.astro';
 export async function getStaticPaths() {
   const trips = await getCollection('trips', ({ data }) => data.visibility !== 'private');
   return trips.map(trip => ({
-    params: { slug: trip.id },
+    params: { slug: trip.id.replace('/index', '') },
     props: { trip },
   }));
 }
 
 const { trip } = Astro.props;
-const { title, description, visibility, days, pre_trip_input, cover_photo, destinations, date_start, date_end } = trip.data;
+const tripSlug = trip.id.replace('/index', '');
+const { title, description, visibility, destinations, date_start, date_end, cover_photo } = trip.data;
 
-// suggestMode is always false at build time for static output.
-// Client-side JS below detects ?suggest=true and adds .suggest-active to body.
+// Days sorted by date
+const allDays = await getCollection('days');
+const sortedDays = allDays
+  .filter(d => d.id.startsWith(tripSlug + '/days/'))
+  .sort((a, b) => a.id.localeCompare(b.id));
+
+// Render markdown bodies
+const renderedDays = await Promise.all(
+  sortedDays.map(async (day) => {
+    const { Content } = await render(day);
+    return { data: day.data, Content };
+  })
+);
+
+// Suggestions
+const allSuggestions = await getCollection('suggestions');
+const suggestionsEntry = allSuggestions.find(s => s.id.startsWith(tripSlug + '/'));
+const suggestions = suggestionsEntry?.data.suggestions ?? [];
+
+const daysData = sortedDays.map(d => d.data);
 const noindex = visibility === 'unlisted';
 const isPrivate = visibility === 'private';
 ---
 
 <BaseLayout {title} {description} {noindex}>
   <TripHero {title} {description} {cover_photo} {destinations} {date_start} {date_end} />
-  <TripStats {days} />
-  <JumpNav {days} />
+  <TripStats days={daysData} />
+  <JumpNav days={daysData} />
 
   <div class="trip-body" id="trip-body">
     <div class="timeline">
-      {days.map(day => (
-        <TimelineDay
-          {day}
-          preInput={pre_trip_input}
-          tripSlug={trip.id}
-          {isPrivate}
-        />
+      {renderedDays.map(({ data, Content }) => (
+        <TimelineDay day={data} tripSlug={tripSlug} {isPrivate}>
+          <Content slot="diary" />
+        </TimelineDay>
       ))}
     </div>
 
     <SidePanel
-      preInput={pre_trip_input}
-      tripSlug={trip.id}
+      preInput={suggestions}
+      tripSlug={tripSlug}
     />
   </div>
 </BaseLayout>
 
 <script>
-  // Activate suggest mode client-side if ?suggest=true
   if (new URLSearchParams(window.location.search).get('suggest') === 'true') {
     document.body.classList.add('suggest-active');
     document.getElementById('trip-body')?.classList.add('trip-body--suggest');
   }
-  // Show the side panel if there are notes (has-notes class on body)
   const panel = document.getElementById('side-panel');
   if (panel) {
     const hasNotes = panel.querySelectorAll('.note').length > 0;
