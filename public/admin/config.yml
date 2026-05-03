@@ -1,3 +1,10 @@
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: dcktmxuxu
+    api_key: 193492779374426
+    upload_preset: ml_default
+
 backend:
   name: git-gateway
   branch: master
