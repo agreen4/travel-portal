@@ -7,6 +7,7 @@
   --border: #e0ddd8;
   --accent: #2c5f8a;
   --accent-hover: #245078;
+  --diary-accent: #c47c3e;
   --font-serif: Georgia, 'Times New Roman', serif;
   --font-sans: system-ui, -apple-system, sans-serif;
   --max-width: 860px;
@@ -119,4 +120,133 @@ h3 { font-size: 1.1rem; font-weight: 600; font-family: var(--font-sans); }
   .trip-body--suggest { grid-template-columns: 1fr; }
   main { padding: 1rem; }
   h1 { font-size: 1.75rem; }
+}
+
+/* ── View Toggle ─────────────────────────────────── */
+.view-toggle {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  width: fit-content;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.view-toggle__btn {
+  padding: 0.45rem 1.1rem;
+  border: none;
+  background: #fff;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-right: 1px solid var(--border);
+  transition: background 0.15s, color 0.15s;
+}
+.view-toggle__btn:last-child { border-right: none; }
+.view-toggle__btn--active { background: var(--accent); color: #fff; }
+.view-toggle__btn:hover:not(.view-toggle__btn--active) {
+  background: #f0eee9;
+  color: var(--text);
+}
+
+/* ── Diary Node (Combined view) ──────────────────── */
+.diary-node {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+.diary-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--diary-accent);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--diary-accent);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+.diary-badge {
+  color: var(--diary-accent);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+.diary-node__title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+.diary-node__prose {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--text);
+  max-width: 600px;
+}
+.diary-node__prose p { margin-bottom: 0.75em; }
+.diary-node__prose p:last-child { margin-bottom: 0; }
+.diary-node__photos {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  flex-wrap: wrap;
+}
+.diary-node__photo {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 3px;
+  display: block;
+}
+
+/* ── Journal Entry (Journal view) ────────────────── */
+.journal-entry {
+  margin-bottom: 3.5rem;
+  padding-bottom: 3.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.journal-entry:last-child { border-bottom: none; }
+.journal-entry__date {
+  color: var(--diary-accent);
+  margin-bottom: 0.3rem;
+  display: block;
+}
+.journal-entry__title {
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+.journal-entry__prose {
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 640px;
+}
+.journal-entry__prose p { margin-bottom: 1em; }
+.journal-entry__prose p:last-child { margin-bottom: 0; }
+.journal-entry__photos {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+.journal-entry__photo {
+  width: 180px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 3px;
+  display: block;
+}
+
+/* ── Diary empty state ───────────────────────────── */
+.diary-empty {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--text-light);
+  font-style: italic;
+  padding: 2rem 0;
 }
