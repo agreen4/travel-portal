@@ -1,0 +1,35 @@
+---
+interface DiaryData {
+  date: Date;
+  location: string;
+  title?: string;
+  photos: string[];
+}
+interface Props {
+  data: DiaryData;
+}
+const { data } = Astro.props;
+const monthDay = data.date.toLocaleDateString('en-US', {
+  month: 'short', day: 'numeric', timeZone: 'UTC',
+});
+---
+
+<div class="diary-node">
+  <div>
+    <div class="diary-dot"></div>
+  </div>
+  <div>
+    <span class="diary-badge label">Journal · {monthDay}</span>
+    {data.title && <p class="diary-node__title">{data.title}</p>}
+    <div class="diary-node__prose">
+      <slot />
+    </div>
+    {data.photos.length > 0 && (
+      <div class="diary-node__photos">
+        {data.photos.map(url => (
+          <img src={url} alt="" class="diary-node__photo" loading="lazy" />
+        ))}
+      </div>
+    )}
+  </div>
+</div>
