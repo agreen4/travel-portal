@@ -77,4 +77,15 @@ const suggestions = defineCollection({
   }),
 });
 
-export const collections = { trips, days, bookings, suggestions };
+const diary = defineCollection({
+  loader: glob({ pattern: '**/diary/*.md', base: './src/content/trips' }),
+  schema: z.object({
+    date: z.coerce.date(),
+    location: z.string(),
+    title: z.string().optional(),
+    photos: z.array(z.string()).default([]),
+    trip: z.string(),
+  }),
+});
+
+export const collections = { trips, days, bookings, suggestions, diary };
