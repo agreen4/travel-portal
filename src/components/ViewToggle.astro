@@ -1,0 +1,38 @@
+---
+interface Props {
+  defaultMode: 'plan' | 'journal' | 'combined';
+}
+const { defaultMode } = Astro.props;
+---
+
+<div class="view-toggle" role="group" aria-label="View mode">
+  <button class="view-toggle__btn" data-mode="plan" aria-pressed="false">Plan</button>
+  <button class="view-toggle__btn" data-mode="journal" aria-pressed="false">Journal</button>
+  <button class="view-toggle__btn" data-mode="combined" aria-pressed="false">Combined</button>
+</div>
+
+<script define:vars={{ defaultMode }}>
+  const PARAM = 'mode';
+
+  function applyMode(mode) {
+    ['plan', 'journal', 'combined'].forEach(v => {
+      const el = document.getElementById('view-' + v);
+      if (el) el.hidden = v !== mode;
+    });
+    document.querySelectorAll('.view-toggle__btn').forEach(btn => {
+      const active = btn.dataset.mode === mode;
+      btn.classList.toggle('view-toggle__btn--active', active);
+      btn.setAttribute('aria-pressed', String(active));
+    });
+    const url = new URL(window.location.href);
+    url.searchParams.set(PARAM, mode);
+    history.replaceState(null, '', url);
+  }
+
+  document.querySelectorAll('.view-toggle__btn').forEach(btn => {
+    btn.addEventListener('click', () => applyMode(btn.dataset.mode));
+  });
+
+  const initial = new URLSearchParams(window.location.search).get(PARAM) || defaultMode;
+  applyMode(initial);
+</script>
