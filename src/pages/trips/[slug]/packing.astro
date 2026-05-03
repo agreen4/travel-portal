@@ -1,0 +1,218 @@
+---
+// src/pages/trips/[slug]/packing.astro
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PackingSection from '../../../components/PackingSection.astro';
+import { formatDateRange } from '../../../utils/format-date';
+
+export async function getStaticPaths() {
+  const packingLists = await getCollection('packing');
+  const trips = await getCollection('trips');
+
+  return packingLists.map(list => {
+    const slug = list.id;
+    const trip = trips.find(t => t.id.replace('/index', '') === slug);
+    return {
+      params: { slug },
+      props: { list, trip },
+    };
+  });
+}
+
+const { list, trip } = Astro.props;
+const slug = list.id;
+const { sections, dimensions, generated } = list.data;
+const totalItems = sections.reduce((sum, s) => sum + s.items.length, 0);
+const tripTitle = trip?.data.title ?? slug;
+const tripDates = trip ? formatDateRange(trip.data.date_start, trip.data.date_end) : '';
+---
+
+<BaseLayout title={`Packing — ${tripTitle}`} noindex={true}>
+  <div
+    class="packing-page"
+    data-trip-slug={slug}
+    data-total-items={totalItems}
+  >
+    <div class="packing-header">
+      <p class="label">
+        <a href={`/trips/${slug}`}>{tripTitle}</a>
+        {tripDates && <span> · {tripDates}</span>}
+      </p>
+      <h1>Packing Checklist</h1>
+
+      <div class="packing-meta">
+        <div class="dimension-tags">
+          {dimensions.map(d => <span class="tag">{d}</span>)}
+        </div>
+        <div class="progress-row">
+          <div class="progress-bar">
+            <div class="progress-bar__fill" id="progress-fill" style="width: 0%"></div>
+          </div>
+          <span class="progress-label" id="progress-label">0 of {totalItems} packed</span>
+          <button class="reset-btn" id="reset-btn">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="packing-sections">
+      {sections.map(section => (
+        <PackingSection
+          name={section.name}
+          items={section.items}
+          tripSlug={slug}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const root = document.querySelector<HTMLElement>('.packing-page')!;
+  const tripSlug = root.dataset.tripSlug!;
+  const totalItems = parseInt(root.dataset.totalItems!, 10);
+  const STORAGE_KEY = `packing-${tripSlug}`;
+
+  function loadState(): Record<string, boolean> {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
+    } catch {
+      return {};
+    }
+  }
+
+  function saveState(state: Record<string, boolean>) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function updateProgress(state: Record<string, boolean>) {
+    const checked = Object.values(state).filter(Boolean).length;
+    const pct = totalItems > 0 ? (checked / totalItems) * 100 : 0;
+    const fill = document.getElementById('progress-fill')!;
+    const label = document.getElementById('progress-label')!;
+    fill.style.width = `${pct}%`;
+    label.textContent = `${checked} of ${totalItems} packed`;
+  }
+
+  // Restore saved state
+  const state = loadState();
+  const checkboxes = root.querySelectorAll<HTMLInputElement>('.item-check');
+  checkboxes.forEach(cb => {
+    const key = cb.dataset.key!;
+    if (state[key]) cb.checked = true;
+  });
+  updateProgress(state);
+
+  // Save on change
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const key = cb.dataset.key!;
+      const current = loadState();
+      current[key] = cb.checked;
+      saveState(current);
+      updateProgress(current);
+    });
+  });
+
+  // Reset
+  document.getElementById('reset-btn')!.addEventListener('click', () => {
+    if (!confirm('Reset all checkboxes?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    checkboxes.forEach(cb => { cb.checked = false; });
+    updateProgress({});
+  });
+</script>
+
+<style>
+  .packing-header {
+    margin-bottom: 2rem;
+  }
+
+  .packing-header h1 {
+    margin: 0.3rem 0 1rem;
+  }
+
+  .packing-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .dimension-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.15rem 0.5rem;
+  }
+
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .progress-bar {
+    flex: 1;
+    max-width: 240px;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-bar__fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 3px;
+    transition: width 0.2s ease;
+  }
+
+  .progress-label {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .reset-btn {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .reset-btn:hover {
+    color: var(--text);
+    border-color: var(--text-muted);
+  }
+
+  @media print {
+    .packing-meta,
+    .dimension-tags,
+    .progress-row,
+    .reset-btn {
+      display: none;
+    }
+
+    .packing-header h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+</style>
