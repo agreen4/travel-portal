@@ -1,15 +1,15 @@
 ---
 import { getCollection, render } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import TripHero from '../../components/TripHero.astro';
-import TripStats from '../../components/TripStats.astro';
-import ViewToggle from '../../components/ViewToggle.astro';
-import JumpNav from '../../components/JumpNav.astro';
-import TimelineDay from '../../components/TimelineDay.astro';
-import DiaryNode from '../../components/DiaryNode.astro';
-import DiaryEntry from '../../components/DiaryEntry.astro';
-import SidePanel from '../../components/SidePanel.astro';
-import { mergeTimeline } from '../../utils/merge-timeline';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TripHero from '../../../components/TripHero.astro';
+import TripStats from '../../../components/TripStats.astro';
+import ViewToggle from '../../../components/ViewToggle.astro';
+import JumpNav from '../../../components/JumpNav.astro';
+import TimelineDay from '../../../components/TimelineDay.astro';
+import DiaryNode from '../../../components/DiaryNode.astro';
+import DiaryEntry from '../../../components/DiaryEntry.astro';
+import SidePanel from '../../../components/SidePanel.astro';
+import { mergeTimeline } from '../../../utils/merge-timeline';
 
 export async function getStaticPaths() {
   const trips = await getCollection('trips', ({ data }) => data.visibility !== 'private');
