@@ -1,0 +1,29 @@
+---
+import { formatDay } from '../utils/format-date';
+
+interface DiaryData {
+  date: Date;
+  location: string;
+  title?: string;
+  photos: string[];
+}
+interface Props {
+  data: DiaryData;
+}
+const { data } = Astro.props;
+---
+
+<article class="journal-entry">
+  <span class="journal-entry__date label">{formatDay(data.date)} · {data.location}</span>
+  {data.title && <h2 class="journal-entry__title">{data.title}</h2>}
+  <div class="journal-entry__prose">
+    <slot />
+  </div>
+  {data.photos.length > 0 && (
+    <div class="journal-entry__photos">
+      {data.photos.map(url => (
+        <img src={url} alt="" class="journal-entry__photo" loading="lazy" />
+      ))}
+    </div>
+  )}
+</article>
