@@ -1,3 +1,10 @@
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: dcktmxuxu
+    api_key: 193492779374426
+    upload_preset: travel-portal
+
 backend:
   name: git-gateway
   branch: master
@@ -71,3 +78,29 @@ collections:
           - { label: Author, name: author, widget: string }
           - { label: Note, name: note, widget: text }
           - { label: URL, name: url, widget: string, required: false }
+  - name: diary
+    label: Journal
+    folder: src/content/trips
+    path: "{{trip}}/diary/{{date}}"
+    create: true
+    extension: md
+    format: frontmatter
+    fields:
+      - label: Trip
+        name: trip
+        widget: select
+        options: [japan-2026, helsinki-tallinn-2026]
+      - label: Date
+        name: date
+        widget: datetime
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+      - { label: Location, name: location, widget: string }
+      - { label: Title, name: title, widget: string, required: false }
+      - label: Photos
+        name: photos
+        widget: list
+        required: false
+        field: { label: Photo, name: photo, widget: image }
+      - { label: Entry, name: body, widget: markdown }

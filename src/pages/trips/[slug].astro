@@ -1,61 +1,127 @@
 ---
-// src/pages/trips/[slug].astro
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TripHero from '../../components/TripHero.astro';
 import TripStats from '../../components/TripStats.astro';
+import ViewToggle from '../../components/ViewToggle.astro';
 import JumpNav from '../../components/JumpNav.astro';
 import TimelineDay from '../../components/TimelineDay.astro';
+import DiaryNode from '../../components/DiaryNode.astro';
+import DiaryEntry from '../../components/DiaryEntry.astro';
 import SidePanel from '../../components/SidePanel.astro';
+import { mergeTimeline } from '../../utils/merge-timeline';
 
 export async function getStaticPaths() {
   const trips = await getCollection('trips', ({ data }) => data.visibility !== 'private');
   return trips.map(trip => ({
-    params: { slug: trip.id },
+    params: { slug: trip.id.replace('/index', '') },
     props: { trip },
   }));
 }
 
 const { trip } = Astro.props;
-const { title, description, visibility, days, pre_trip_input, cover_photo, destinations, date_start, date_end } = trip.data;
+const tripSlug = trip.id.replace('/index', '');
+const { title, description, visibility, destinations, date_start, date_end, cover_photo } = trip.data;
 
-// suggestMode is always false at build time for static output.
-// Client-side JS below detects ?suggest=true and adds .suggest-active to body.
+// Planning days
+const allDays = await getCollection('days');
+const sortedDays = allDays
+  .filter(d => d.id.startsWith(tripSlug + '/days/'))
+  .sort((a, b) => a.id.localeCompare(b.id));
+
+const renderedDays = await Promise.all(
+  sortedDays.map(async (day) => {
+    const { Content } = await render(day);
+    return { data: day.data, Content };
+  })
+);
+
+// Diary entries
+const allDiary = await getCollection('diary');
+const sortedDiary = allDiary
+  .filter(e => e.id.startsWith(tripSlug + '/diary/'))
+  .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+
+const renderedDiary = await Promise.all(
+  sortedDiary.map(async (entry) => {
+    const { Content } = await render(entry);
+    return { data: entry.data, Content };
+  })
+);
+
+// Combined timeline — plan days and diary entries merged by date
+const combinedItems = mergeTimeline(
+  renderedDays.map(d => ({ date: d.data.date, rendered: d })),
+  renderedDiary.map(e => ({ date: e.data.date, rendered: e }))
+);
+
+// Suggestions
+const allSuggestions = await getCollection('suggestions');
+const suggestionsEntry = allSuggestions.find(s => s.id.startsWith(tripSlug + '/'));
+const suggestions = suggestionsEntry?.data.suggestions ?? [];
+
+const daysData = sortedDays.map(d => d.data);
 const noindex = visibility === 'unlisted';
 const isPrivate = visibility === 'private';
+const defaultMode = renderedDiary.length > 0 ? 'combined' : 'plan';
 ---
 
 <BaseLayout {title} {description} {noindex}>
   <TripHero {title} {description} {cover_photo} {destinations} {date_start} {date_end} />
-  <TripStats {days} />
-  <JumpNav {days} />
+  <TripStats days={daysData} />
+  <ViewToggle defaultMode={defaultMode} />
+  <JumpNav days={daysData} />
 
   <div class="trip-body" id="trip-body">
-    <div class="timeline">
-      {days.map(day => (
-        <TimelineDay
-          {day}
-          preInput={pre_trip_input}
-          tripSlug={trip.id}
-          {isPrivate}
-        />
-      ))}
+
+    {/* Plan view */}
+    <div id="view-plan">
+      <div class="timeline">
+        {renderedDays.map(({ data, Content }) => (
+          <TimelineDay day={data} tripSlug={tripSlug} {isPrivate}>
+            <Content slot="diary" />
+          </TimelineDay>
+        ))}
+      </div>
     </div>
 
-    <SidePanel
-      preInput={pre_trip_input}
-      tripSlug={trip.id}
-    />
+    {/* Journal view */}
+    <div id="view-journal" hidden>
+      {renderedDiary.length === 0
+        ? <p class="diary-empty">No journal entries yet.</p>
+        : renderedDiary.map(({ data, Content }) => (
+            <DiaryEntry {data}><Content /></DiaryEntry>
+          ))
+      }
+    </div>
+
+    {/* Combined view */}
+    <div id="view-combined" hidden>
+      <div class="timeline">
+        {combinedItems.map(item => {
+          if (item.type === 'plan') {
+            const { data, Content } = item.rendered;
+            return (
+              <TimelineDay day={data} tripSlug={tripSlug} {isPrivate}>
+                <Content slot="diary" />
+              </TimelineDay>
+            );
+          }
+          const { data, Content } = item.rendered;
+          return <DiaryNode {data}><Content /></DiaryNode>;
+        })}
+      </div>
+    </div>
+
+    <SidePanel preInput={suggestions} tripSlug={tripSlug} />
   </div>
 </BaseLayout>
 
 <script>
-  // Activate suggest mode client-side if ?suggest=true
   if (new URLSearchParams(window.location.search).get('suggest') === 'true') {
     document.body.classList.add('suggest-active');
     document.getElementById('trip-body')?.classList.add('trip-body--suggest');
   }
-  // Show the side panel if there are notes (has-notes class on body)
   const panel = document.getElementById('side-panel');
   if (panel) {
     const hasNotes = panel.querySelectorAll('.note').length > 0;

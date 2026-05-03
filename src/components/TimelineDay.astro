@@ -6,27 +6,25 @@ import MealBlock from './MealBlock.astro';
 
 interface Activity { id: string; time?: string; name: string; description?: string; url?: string; photo?: string; }
 interface Meal { id: string; time?: string; restaurant: string; dish?: string; notes?: string; url?: string; }
-interface Accommodation { name: string; url?: string; confirmation?: string; }
+interface Accommodation { name: string; url?: string; }
 interface Day {
   date: Date;
   location: string;
+  title?: string;
   notes?: string;
   accommodation?: Accommodation;
   activities: Activity[];
   meals: Meal[];
 }
-interface PreInput { activity_id: string; author: string; note: string; url?: string; }
 
 interface Props {
   day: Day;
-  preInput: PreInput[];
   tripSlug: string;
   isPrivate: boolean;
 }
-const { day, preInput, tripSlug, isPrivate } = Astro.props;
+const { day, tripSlug, isPrivate } = Astro.props;
 const locationId = day.location.toLowerCase().replace(/\s+/g, '-');
 
-// Parse "9:00 PM" / "11:00 AM" / "14:30" style times to minutes for sorting
 function parseTime(t: string | undefined): number {
   if (!t) return Infinity;
   const upper = t.toUpperCase();
@@ -40,7 +38,6 @@ function parseTime(t: string | undefined): number {
   return hours * 60 + parseInt(m, 10);
 }
 
-// Merge and sort activities + meals by time for display
 const items = [
   ...day.activities.map(a => ({ ...a, type: 'activity' as const })),
   ...day.meals.map(m => ({ ...m, type: 'meal' as const })),
@@ -55,6 +52,7 @@ const items = [
     <div class="day__header">
       <p class="label day__date">{formatDay(day.date)}</p>
       <h2 class="day__location">{day.location}</h2>
+      {day.title && <p class="day__title">{day.title}</p>}
     </div>
 
     {day.notes && <p class="day__notes">{day.notes}</p>}
@@ -66,9 +64,6 @@ const items = [
           ? <a href={day.accommodation.url} target="_blank" rel="noopener">{day.accommodation.name}</a>
           : <span>{day.accommodation.name}</span>
         }
-        {isPrivate && day.accommodation.confirmation && (
-          <span class="accommodation__conf label"> · {day.accommodation.confirmation}</span>
-        )}
       </div>
     )}
 
@@ -77,6 +72,10 @@ const items = [
         ? <ActivityBlock {...item} />
         : <MealBlock {...item} />
     )}
+
+    <div class="day__diary">
+      <slot name="diary" />
+    </div>
   </div>
 </div>
 
@@ -101,7 +100,8 @@ const items = [
   }
   .day__content { padding-bottom: 1rem; }
   .day__date { margin-bottom: 0.2rem; }
-  .day__location { margin-bottom: 0.75rem; font-size: 1.25rem; }
+  .day__location { margin-bottom: 0.2rem; font-size: 1.25rem; }
+  .day__title { font-size: 0.85rem; color: var(--text-muted); font-family: var(--font-sans); margin-bottom: 0.75rem; }
   .day__notes { font-style: italic; color: var(--text-muted); margin-bottom: 1rem; font-size: 0.9rem; }
   .accommodation {
     font-family: var(--font-sans);
@@ -109,5 +109,13 @@ const items = [
     margin-bottom: 1rem;
     color: var(--text-muted);
   }
-  .accommodation__conf { color: var(--text-light); }
+  .day__diary {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .day__diary:empty { display: none; }
 </style>

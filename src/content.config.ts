@@ -19,21 +19,13 @@ const mealSchema = z.object({
   url: z.string().optional(),
 });
 
-const daySchema = z.object({
-  date: z.coerce.date(),
-  location: z.string(),
-  notes: z.string().optional(),
-  accommodation: z.object({
-    name: z.string(),
-    url: z.string().optional(),
-    confirmation: z.string().optional(),
-  }).optional(),
-  activities: z.array(activitySchema).default([]),
-  meals: z.array(mealSchema).default([]),
-});
+const bookingItemSchema = z.object({
+  id: z.string(),
+  confirmation: z.string().optional(),
+}).passthrough();
 
 const trips = defineCollection({
-  loader: glob({ pattern: '**/*.{json,yaml,yml}', base: './src/content/trips' }),
+  loader: glob({ pattern: '**/index.{yaml,yml}', base: './src/content/trips' }),
   schema: z.object({
     title: z.string(),
     visibility: z.enum(['public', 'unlisted', 'private']),
@@ -42,8 +34,41 @@ const trips = defineCollection({
     date_end: z.coerce.date(),
     cover_photo: z.string(),
     description: z.string(),
-    days: z.array(daySchema).default([]),
-    pre_trip_input: z.array(z.object({
+  }),
+});
+
+const days = defineCollection({
+  loader: glob({ pattern: '**/days/*.md', base: './src/content/trips' }),
+  schema: z.object({
+    date: z.coerce.date(),
+    location: z.string(),
+    title: z.string().optional(),
+    notes: z.string().optional(),
+    accommodation: z.object({
+      name: z.string(),
+      url: z.string().optional(),
+    }).optional(),
+    activities: z.array(activitySchema).default([]),
+    meals: z.array(mealSchema).default([]),
+  }),
+});
+
+const bookings = defineCollection({
+  loader: glob({ pattern: '**/bookings.{yaml,yml}', base: './src/content/trips' }),
+  schema: z.object({
+    flights: z.array(bookingItemSchema).default([]),
+    hotels: z.array(bookingItemSchema).default([]),
+    activities: z.array(bookingItemSchema).default([]),
+    restaurants: z.array(bookingItemSchema).default([]),
+    rail: z.array(bookingItemSchema).default([]),
+    ferries: z.array(bookingItemSchema).default([]),
+  }),
+});
+
+const suggestions = defineCollection({
+  loader: glob({ pattern: '**/suggestions.{yaml,yml}', base: './src/content/trips' }),
+  schema: z.object({
+    suggestions: z.array(z.object({
       activity_id: z.string(),
       author: z.string(),
       note: z.string(),
@@ -52,4 +77,15 @@ const trips = defineCollection({
   }),
 });
 
-export const collections = { trips };
+const diary = defineCollection({
+  loader: glob({ pattern: '**/diary/*.md', base: './src/content/trips' }),
+  schema: z.object({
+    date: z.coerce.date(),
+    location: z.string(),
+    title: z.string().optional(),
+    photos: z.array(z.string()).default([]),
+    trip: z.string(),
+  }),
+});
+
+export const collections = { trips, days, bookings, suggestions, diary };
