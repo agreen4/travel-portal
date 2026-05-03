@@ -3,7 +3,7 @@ media_library:
   config:
     cloud_name: dcktmxuxu
     api_key: 193492779374426
-    upload_preset: ml_default
+    upload_preset: travel-portal
 
 backend:
   name: git-gateway
