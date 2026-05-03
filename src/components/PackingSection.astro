@@ -14,7 +14,7 @@ const { name, items, tripSlug } = Astro.props;
 ---
 
 <div class="packing-section">
-  <h3 class="section-heading">{name}</h3>
+  <h3 class="packing-section__heading">{name}</h3>
   <ul class="item-list">
     {items.map(item => (
       <li class="item">
@@ -39,7 +39,7 @@ const { name, items, tripSlug } = Astro.props;
     margin-bottom: 1rem;
   }
 
-  .section-heading {
+  .packing-section__heading {
     margin-bottom: 0.75rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--border);

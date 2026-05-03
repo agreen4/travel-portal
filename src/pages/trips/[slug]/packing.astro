@@ -21,7 +21,7 @@ export async function getStaticPaths() {
 
 const { list, trip } = Astro.props;
 const slug = list.id;
-const { sections, dimensions, generated } = list.data;
+const { sections, dimensions } = list.data;
 const totalItems = sections.reduce((sum, s) => sum + s.items.length, 0);
 const tripTitle = trip?.data.title ?? slug;
 const tripDates = trip ? formatDateRange(trip.data.date_start, trip.data.date_end) : '';
@@ -85,7 +85,7 @@ const tripDates = trip ? formatDateRange(trip.data.date_start, trip.data.date_en
   }
 
   function updateProgress(state: Record<string, boolean>) {
-    const checked = Object.values(state).filter(Boolean).length;
+    const checked = Array.from(checkboxes).filter(cb => state[cb.dataset.key!]).length;
     const pct = totalItems > 0 ? (checked / totalItems) * 100 : 0;
     const fill = document.getElementById('progress-fill')!;
     const label = document.getElementById('progress-label')!;
