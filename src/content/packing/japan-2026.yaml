@@ -1,0 +1,87 @@
+trip: japan-2026
+dimensions: [family, international, long]
+generated: 2026-05-03
+sections:
+  - name: Documents & Money
+    items:
+      - label: Passport (Andrew)
+      - label: Passport (Kim)
+      - label: Passport (Bea)
+      - label: Credit cards (Visa + backup)
+      - label: Driver's license
+      - label: Travel insurance info
+      - label: Trip confirmation printout
+      - label: Printed visa / ESTA confirmation
+      - label: Foreign currency — Yen (cash)
+      - label: Emergency contact card
+  - name: Clothing
+    items:
+      - label: Shirts × 14
+      - label: Underwear × 14
+      - label: Socks × 14
+      - label: Pants × 2
+      - label: Comfortable walking shoes
+      - label: Light jacket / hoodie
+      - label: Belt
+      - label: Pajamas
+      - label: Travel laundry detergent (sheets)
+  - name: Toiletries
+    items:
+      - label: Toothbrush + toothpaste
+      - label: Deodorant × 2
+      - label: Razor + extra blades
+      - label: Shampoo / conditioner
+      - label: Face wash
+      - label: Moisturizer
+      - label: Sunscreen SPF 50
+      - label: Daily medications — full 30-day supply
+      - label: Extra contacts / glasses
+      - label: Lip balm
+  - name: Tech
+    items:
+      - label: Phone + cable
+      - label: Laptop + charger
+      - label: Noise-canceling headphones
+      - label: Power bank — 20,000mAh
+      - label: iPad + charger (Bea)
+      - label: Universal power adapter
+      - label: Japan SIM or eSIM activated
+      - label: MicroSD cards
+      - label: Extra power bank or dual-port charger
+  - name: Camera
+    items:
+      - label: Camera body (Sony a7iv)
+      - label: Voigtländer 21mm lens
+      - label: Sony 35mm lens
+      - label: Spare batteries × 2
+      - label: Battery charger
+      - label: Memory cards × 3
+      - label: Lens cloths
+      - label: Camera bag liner
+  - name: Health & Safety
+    items:
+      - label: Hand sanitizer
+      - label: Face masks × 10
+      - label: First aid kit (bandaids, ibuprofen, antacids)
+      - label: Melatonin
+      - label: Bea's medications
+      - label: Children's Tylenol / Benadryl
+      - label: Bea's vitamins
+      - label: Prescription copy (customs)
+      - label: Anti-diarrheal medication
+      - label: Probiotics
+  - name: Misc
+    items:
+      - label: Small daypack for day outings
+      - label: Reusable water bottle
+      - label: Pen + small notebook
+      - label: Collapsible laundry bag
+      - label: Portable luggage scale
+      - label: Offline maps — Japan (Google Maps)
+      - label: Translation app offline (Google Translate)
+      - label: Bea's comfort item / stuffed animal
+      - label: Bea's activity bag + snacks for travel day
+  - name: Trip-specific
+    items:
+      - label: Japan Rail Pass — confirm physical pass received
+      - label: IC Card / Suica — purchase on arrival at NRT

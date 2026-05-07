@@ -88,4 +88,23 @@ const diary = defineCollection({
   }),
 });
 
-export const collections = { trips, days, bookings, suggestions, diary };
+const packingItemSchema = z.object({
+  label: z.string(),
+});
+
+const packingSectionSchema = z.object({
+  name: z.string(),
+  items: z.array(packingItemSchema),
+});
+
+const packing = defineCollection({
+  loader: glob({ pattern: '*.{yaml,yml}', base: './src/content/packing' }),
+  schema: z.object({
+    trip: z.string(),
+    dimensions: z.array(z.string()),
+    generated: z.coerce.date(),
+    sections: z.array(packingSectionSchema),
+  }),
+});
+
+export const collections = { trips, days, bookings, suggestions, diary, packing };
