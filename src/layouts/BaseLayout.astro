@@ -48,13 +48,19 @@ const pw = import.meta.env.PUBLIC_TRIP_PASSWORD ?? '';
     function applyUnlocked() {
       document.body.classList.add('private-unlocked');
       const btn = document.getElementById('private-lock-btn');
-      if (btn) btn.textContent = '🔓 Details';
+      if (btn) {
+        btn.textContent = '🔓 Details';
+        btn.setAttribute('aria-label', 'Hide private details');
+      }
     }
 
     function applyLocked() {
       document.body.classList.remove('private-unlocked');
       const btn = document.getElementById('private-lock-btn');
-      if (btn) btn.textContent = '🔒 Details';
+      if (btn) {
+        btn.textContent = '🔒 Details';
+        btn.setAttribute('aria-label', 'Show private details');
+      }
     }
 
     // Restore from localStorage on page load

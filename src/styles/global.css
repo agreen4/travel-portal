@@ -256,7 +256,7 @@ h3 { font-size: 1.1rem; font-weight: 600; font-family: var(--font-sans); }
   display: none;
 }
 body.private-unlocked .private-field {
-  display: inline;
+  display: revert;
 }
 
 /* Private lock button */
@@ -278,6 +278,10 @@ body.private-unlocked .private-field {
 .private-lock-btn:hover {
   border-color: var(--accent, #333);
   color: var(--accent, #333);
+}
+.private-lock-btn:focus-visible {
+  outline: 2px solid var(--accent, #333);
+  outline-offset: 2px;
 }
 body.private-unlocked .private-lock-btn {
   color: var(--accent, #333);
