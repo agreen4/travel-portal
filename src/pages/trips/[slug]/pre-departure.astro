@@ -1,0 +1,239 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TripNav from '../../../components/TripNav.astro';
+
+export async function getStaticPaths() {
+  const trips = await getCollection('trips', ({ data }) => data.visibility !== 'private');
+  return trips.map(trip => ({
+    params: { slug: trip.id.replace('/index', '') },
+    props: { trip },
+  }));
+}
+
+const { trip } = Astro.props;
+const tripSlug = trip.id.replace('/index', '');
+const { title, visibility, status } = trip.data;
+const noindex = visibility === 'unlisted';
+
+// Pre-departure data
+const allPreDeparture = await getCollection('preDeparture');
+const preDep = allPreDeparture.find(p => p.data.trip === tripSlug);
+
+// Packing list
+const allPacking = await getCollection('packing');
+const packing = allPacking.find(p => p.data.trip === tripSlug);
+
+// Accommodation from day files (unique hotels)
+const allDays = await getCollection('days');
+const tripDays = allDays
+  .filter(d => d.id.startsWith(tripSlug + '/days/'))
+  .sort((a, b) => a.id.localeCompare(b.id));
+
+// Deduplicate accommodations
+const seenHotels = new Set<string>();
+const accommodations: { name: string; url?: string; confirmation?: string; checkIn: Date; checkOut: Date }[] = [];
+for (let i = 0; i < tripDays.length; i++) {
+  const acc = tripDays[i].data.accommodation;
+  if (!acc || seenHotels.has(acc.name)) continue;
+  seenHotels.add(acc.name);
+  // Find last consecutive day with same hotel
+  let j = i;
+  while (j + 1 < tripDays.length && tripDays[j + 1].data.accommodation?.name === acc.name) j++;
+  const checkOut = new Date(tripDays[j].data.date);
+  checkOut.setDate(checkOut.getDate() + 1);
+  accommodations.push({
+    name: acc.name,
+    url: acc.url,
+    confirmation: acc.confirmation,
+    checkIn: tripDays[i].data.date,
+    checkOut,
+  });
+}
+---
+
+<BaseLayout title={`Pre-Departure — ${title}`} noindex={noindex}>
+  <div class="page-header">
+    <h1 class="page-title">{title}</h1>
+    <p class="page-subtitle">Pre-Departure Guide</p>
+  </div>
+  <TripNav {tripSlug} currentPage="pre-departure" {status} />
+
+  <div class="pre-dep-content">
+
+    {/* Flights */}
+    {preDep && preDep.data.flights.length > 0 && (
+      <section class="pre-dep-section">
+        <h2>Flights</h2>
+        <table class="data-table">
+          <thead>
+            <tr><th>Flight</th><th>Route</th><th>Departs</th><th>Arrives</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            {preDep.data.flights.map(f => (
+              <tr>
+                <td class="mono">{f.number}</td>
+                <td>{f.route}</td>
+                <td>{f.depart}</td>
+                <td>{f.arrive}</td>
+                <td>{f.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    )}
+
+    {/* Accommodation Hub */}
+    {accommodations.length > 0 && (
+      <section class="pre-dep-section">
+        <h2>Accommodation</h2>
+        <table class="data-table">
+          <thead>
+            <tr><th>Hotel</th><th>Check-in</th><th>Check-out</th><th class="private-field">Confirmation</th></tr>
+          </thead>
+          <tbody>
+            {accommodations.map(acc => (
+              <tr>
+                <td>
+                  {acc.url
+                    ? <a href={acc.url} target="_blank" rel="noopener">{acc.name}</a>
+                    : acc.name
+                  }
+                </td>
+                <td>{acc.checkIn.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</td>
+                <td>{acc.checkOut.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</td>
+                <td class="mono private-field">{acc.confirmation ?? '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    )}
+
+    {/* Luggage Forwarding */}
+    {preDep && preDep.data.ta_q_bin.length > 0 && (
+      <section class="pre-dep-section">
+        <h2>TA-Q-BIN Luggage Forwarding</h2>
+        <table class="data-table">
+          <thead>
+            <tr><th>From</th><th>To</th><th>Drop off by</th><th>Arrives</th></tr>
+          </thead>
+          <tbody>
+            {preDep.data.ta_q_bin.map(leg => (
+              <tr>
+                <td>{leg.from_hotel}</td>
+                <td>{leg.to_hotel}</td>
+                <td>{leg.drop_by}</td>
+                <td>{leg.arrives}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    )}
+
+    {/* Jet Lag */}
+    {preDep?.data.jet_lag && (
+      <section class="pre-dep-section">
+        <h2>Jet Lag Schedule</h2>
+        <h3>Pre-Departure</h3>
+        <ul class="jet-lag-list">
+          {preDep.data.jet_lag.pre_departure.map(item => (
+            <li><strong>{item.day}:</strong> {item.instructions}</li>
+          ))}
+        </ul>
+        <h3>Return</h3>
+        <ul class="jet-lag-list">
+          {preDep.data.jet_lag.on_return.map(item => (
+            <li><strong>{item.day}:</strong> {item.instructions}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {/* Pre-Departure Checklist */}
+    {preDep && preDep.data.checklist.length > 0 && (
+      <section class="pre-dep-section">
+        <h2>Pre-Departure Checklist</h2>
+        {preDep.data.checklist.map(cat => (
+          <div class="checklist-category">
+            <h3>{cat.category}</h3>
+            <ul class="checklist">
+              {cat.items.map(item => (
+                <li class:list={['checklist__item', { 'private-field': item.private }]}>
+                  <input type="checkbox" class="checklist__check" />
+                  <span>{item.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+    )}
+
+    {/* Emergency Contacts */}
+    {preDep && preDep.data.emergency_contacts.length > 0 && (
+      <section class="pre-dep-section private-field">
+        <h2>Emergency Contacts</h2>
+        <table class="data-table">
+          <thead>
+            <tr><th>Name</th><th>Phone</th><th>Address</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            {preDep.data.emergency_contacts.map(c => (
+              <tr>
+                <td>{c.name}</td>
+                <td class="mono">{c.phone}</td>
+                <td>{c.address ?? ''}</td>
+                <td>{c.notes ?? ''}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    )}
+
+    {/* Packing List */}
+    {packing && (
+      <section class="pre-dep-section">
+        <h2>Packing List</h2>
+        <p class="packing-meta label">Generated from: {packing.data.dimensions.join(' + ')}</p>
+        {packing.data.sections.map(section => (
+          <div class="checklist-category">
+            <h3>{section.name}</h3>
+            <ul class="checklist">
+              {section.items.map(item => (
+                <li class="checklist__item">
+                  <input type="checkbox" class="checklist__check" />
+                  <span>{item.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+    )}
+
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header { padding: 2rem 1rem 0.5rem; max-width: 800px; margin: 0 auto; }
+  .page-title { font-size: 1.5rem; margin-bottom: 0.2rem; }
+  .page-subtitle { color: var(--text-muted); font-family: var(--font-sans); font-size: 0.85rem; }
+  .pre-dep-content { max-width: 800px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+  .pre-dep-section { margin-bottom: 2.5rem; }
+  .pre-dep-section h2 { font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; margin-bottom: 1rem; }
+  .pre-dep-section h3 { font-size: 0.9rem; color: var(--text-muted); margin: 1rem 0 0.5rem; font-family: var(--font-sans); }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .data-table th { text-align: left; font-family: var(--font-sans); font-size: 0.75rem; color: var(--text-muted); border-bottom: 1px solid var(--border); padding: 0.3rem 0.5rem 0.3rem 0; }
+  .data-table td { padding: 0.4rem 0.5rem 0.4rem 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .mono { font-family: monospace; font-size: 0.8rem; }
+  .jet-lag-list { font-size: 0.9rem; line-height: 1.7; padding-left: 1.25rem; }
+  .checklist-category { margin-bottom: 1rem; }
+  .checklist { list-style: none; padding: 0; }
+  .checklist__item { display: flex; gap: 0.5rem; align-items: flex-start; padding: 0.25rem 0; font-size: 0.875rem; }
+  .checklist__check { margin-top: 3px; flex-shrink: 0; }
+  .packing-meta { margin-bottom: 0.75rem; }
+</style>

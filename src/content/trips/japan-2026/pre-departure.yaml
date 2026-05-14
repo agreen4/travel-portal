@@ -1,0 +1,127 @@
+trip: japan-2026
+
+flights:
+  - number: CX 801
+    route: "Chicago O'Hare (ORD) → Hong Kong (HKG)"
+    depart: "May 25, 4:15 PM"
+    arrive: "May 26, 9:00 PM (local)"
+    notes: "18+ hour flight. Arrive Hong Kong evening of May 26."
+  - number: CX 520
+    route: "Hong Kong (HKG) → Tokyo Narita (NRT)"
+    depart: "May 29, 10:40 AM"
+    arrive: "May 29, 4:05 PM (local)"
+    notes: ""
+  - number: CX 507
+    route: "Osaka Kansai (KIX) → Hong Kong (HKG)"
+    depart: "June 11, 5:35 PM"
+    arrive: "June 11, 8:50 PM (local)"
+    notes: "Haruka 29 from Kyoto Station departs 1:00 PM — collect physical ticket at JR West machine using credit card + 4-digit ID."
+  - number: CX 806
+    route: "Hong Kong (HKG) → Chicago O'Hare (ORD)"
+    depart: "June 12, 12:10 PM"
+    arrive: "June 12, 1:55 PM (local)"
+    notes: "Arrives same calendar day — Chicago is 14 hours behind HKG."
+
+jet_lag:
+  pre_departure:
+    - day: "May 22 (Thu)"
+      instructions: "Shift bedtime 1 hour earlier than usual."
+    - day: "May 23 (Fri)"
+      instructions: "Shift bedtime another hour earlier."
+    - day: "May 24 (Sat)"
+      instructions: "Sleep early. Avoid alcohol. Try to sleep on the overnight flight starting at your Hong Kong bedtime (roughly 10:30 PM Chicago time = noon HKG next day)."
+    - day: "May 25 (Sun — Departure)"
+      instructions: "Light meals. Board CX 801 at 4:15 PM. On the plane: skip the first meal service, sleep as soon as the cabin dims, wake for the second meal."
+  on_return:
+    - day: "June 12 (Fri — Return)"
+      instructions: "You land at 1:55 PM Chicago time. Stay awake until at least 9 PM local time. Brief nap (max 30 min) if needed."
+    - day: "June 13 (Sat)"
+      instructions: "Sleep in slightly but aim to be up by 9 AM. Full day in sunlight."
+    - day: "June 14 (Sun)"
+      instructions: "Normal schedule. Jet lag should be largely resolved."
+
+ta_q_bin:
+  - from_hotel: "&Here Tokyo Ueno"
+    to_hotel: "Sheraton Grand Hiroshima"
+    drop_by: "Evening of June 2"
+    arrives: "June 4 afternoon (bag waits at hotel — you arrive June 4 from baseball game)"
+  - from_hotel: "Sheraton Grand Hiroshima"
+    to_hotel: "Hotel Kanra Kyoto"
+    drop_by: "Evening of June 6"
+    arrives: "June 7 afternoon (you arrive by shinkansen June 7 at 1:19 PM)"
+
+checklist:
+  - category: Documents
+    items:
+      - label: "Passports (all 3) — valid through at least 2027"
+        private: false
+      - label: "Printed trip insurance cards — Faye + World Nomads"
+        private: false
+      - label: "Visit Japan Web QR code completed before departure"
+        private: false
+      - label: "Smart EX app installed — Andrew + Kim"
+        private: false
+      - label: "Tokyo DisneySea app installed — link reservation A00555726363"
+        private: false
+      - label: "Offline Google Maps downloaded: Hong Kong, Tokyo, Hiroshima, Kyoto, Osaka, Nara"
+        private: false
+  - category: Money
+    items:
+      - label: "Notify credit cards of travel dates"
+        private: false
+      - label: "Withdraw ¥50,000–75,000 yen at Narita Airport (7-Eleven or Japan Post ATM)"
+        private: false
+      - label: "Carry HK$ for Hong Kong legs (ATM on arrival)"
+        private: false
+  - category: IC Cards
+    items:
+      - label: "Andrew: Welcome Suica on iPhone via Apple Pay — set up before departure"
+        private: false
+      - label: "Kim: Welcome Suica on iPhone via Apple Pay — set up before departure"
+        private: false
+      - label: "Bea: PASMO Passport (physical) — buy at Narita arrivals, ¥500"
+        private: false
+  - category: Luggage
+    items:
+      - label: "AirTags in all 5 locations: 45L, Sling 10L, Duffel, Passport wallet, spare"
+        private: false
+      - label: "Confirm TA-Q-BIN forwarding dates with hotel concierge on arrival nights"
+        private: false
+  - category: Medical
+    items:
+      - label: "CPAP packed with international adapter"
+        private: false
+      - label: "All prescriptions filled for full trip duration"
+        private: false
+      - label: "OTTA (Japanese pharmacy antacid) — buy at any pharmacy on arrival in Japan"
+        private: false
+
+emergency_contacts:
+  - name: "US Embassy Tokyo"
+    phone: "+81-3-3224-5000"
+    address: "1-10-5 Akasaka, Minato, Tokyo 107-8420"
+    notes: "After hours: +81-3-3224-5000 (press 1 for after-hours)"
+  - name: "US Consulate Osaka (covers Kyoto/Hiroshima)"
+    phone: "+81-6-6315-5900"
+    address: "2-11-5 Nishitenma, Kita-ku, Osaka 530-8543"
+    notes: ""
+  - name: "US Consulate Hong Kong"
+    phone: "+852-2523-9011"
+    address: "26 Garden Road, Central, Hong Kong"
+    notes: ""
+  - name: "Japan Emergency (police/fire/ambulance)"
+    phone: "110 (police) / 119 (fire/ambulance)"
+    address: ""
+    notes: "English available — say 'English, please' immediately"
+  - name: "Hong Kong Emergency"
+    phone: "999"
+    address: ""
+    notes: ""
+  - name: "Faye Travel Insurance"
+    phone: "1-844-329-3299"
+    address: ""
+    notes: "Policy number in Faye app"
+  - name: "World Nomads"
+    phone: "+1-415-901-8235"
+    address: ""
+    notes: "Claim at worldnomads.com"
