@@ -1,0 +1,63 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TripNav from '../../../components/TripNav.astro';
+
+export async function getStaticPaths() {
+  const trips = await getCollection('trips', ({ data }) => data.visibility !== 'private');
+  return trips.map(trip => ({
+    params: { slug: trip.id.replace('/index', '') },
+    props: { trip },
+  }));
+}
+
+const { trip } = Astro.props;
+const tripSlug = trip.id.replace('/index', '');
+const { title, visibility, status } = trip.data;
+const noindex = visibility === 'unlisted';
+
+const allHighlights = await getCollection('highlights');
+const highlightsEntry = allHighlights.find(h => h.data.trip === tripSlug);
+const rendered = highlightsEntry ? await render(highlightsEntry) : null;
+---
+
+<BaseLayout title={`Highlights — ${title}`} noindex={noindex}>
+  <div class="page-header">
+    <h1 class="page-title">{title}</h1>
+    <p class="page-subtitle">Trip Highlights</p>
+  </div>
+  <TripNav {tripSlug} currentPage="highlights" {status} />
+
+  <div class="highlights-content">
+    {rendered
+      ? <rendered.Content />
+      : <p class="empty-state">Highlights will be posted after we return.</p>
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header { padding: 2rem 1rem 0.5rem; max-width: 800px; margin: 0 auto; }
+  .page-title { font-size: 1.5rem; margin-bottom: 0.2rem; }
+  .page-subtitle { color: var(--text-muted); font-family: var(--font-sans); font-size: 0.85rem; }
+  .highlights-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 4rem;
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+  .highlights-content :global(h2) {
+    font-size: 1.25rem;
+    margin-top: 2.5rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .highlights-content :global(h3) {
+    font-size: 0.9rem;
+    font-family: var(--font-sans);
+    color: var(--text-muted);
+    margin: 1.25rem 0 0.4rem;
+  }
+  .empty-state { color: var(--text-muted); font-style: italic; padding-top: 2rem; }
+</style>
