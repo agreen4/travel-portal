@@ -1,0 +1,72 @@
+---
+// src/components/TripNav.astro
+interface Props {
+  tripSlug: string;
+  currentPage: 'itinerary' | 'pre-departure' | 'highlights' | 'gallery' | 'recap';
+  status: 'planning' | 'active' | 'complete';
+}
+const { tripSlug, currentPage, status } = Astro.props;
+const base = `/trips/${tripSlug}`;
+---
+
+<nav class="trip-nav" aria-label="Trip sections">
+  <a href={base} class:list={['trip-nav__link', { 'trip-nav__link--active': currentPage === 'itinerary' }]}>
+    Itinerary
+  </a>
+  <a href={`${base}/pre-departure`} class:list={['trip-nav__link', { 'trip-nav__link--active': currentPage === 'pre-departure' }]}>
+    Pre-Departure
+  </a>
+  <a href={`${base}/highlights`} class:list={['trip-nav__link', { 'trip-nav__link--active': currentPage === 'highlights' }]}>
+    Highlights
+  </a>
+  <a href={`${base}/gallery`} class:list={['trip-nav__link', { 'trip-nav__link--active': currentPage === 'gallery' }]}>
+    Photos
+  </a>
+  {status === 'complete' && (
+    <a href={`${base}/recap`} class:list={['trip-nav__link', 'trip-nav__link--featured', { 'trip-nav__link--active': currentPage === 'recap' }]}>
+      Recap
+    </a>
+  )}
+</nav>
+
+<style>
+  .trip-nav {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .trip-nav__link {
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .trip-nav__link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .trip-nav__link--active {
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .trip-nav__link--featured {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .trip-nav__link--featured:hover {
+    opacity: 0.85;
+    color: var(--bg);
+  }
+</style>

@@ -9,6 +9,7 @@ import TimelineDay from '../../../components/TimelineDay.astro';
 import DiaryNode from '../../../components/DiaryNode.astro';
 import DiaryEntry from '../../../components/DiaryEntry.astro';
 import SidePanel from '../../../components/SidePanel.astro';
+import TripNav from '../../../components/TripNav.astro';
 import { mergeTimeline } from '../../../utils/merge-timeline';
 
 export async function getStaticPaths() {
@@ -21,7 +22,7 @@ export async function getStaticPaths() {
 
 const { trip } = Astro.props;
 const tripSlug = trip.id.replace('/index', '');
-const { title, description, visibility, destinations, date_start, date_end, cover_photo } = trip.data;
+const { title, description, visibility, destinations, date_start, date_end, cover_photo, status } = trip.data;
 
 // Planning days
 const allDays = await getCollection('days');
@@ -63,11 +64,14 @@ const suggestions = suggestionsEntry?.data.suggestions ?? [];
 const daysData = sortedDays.map(d => d.data);
 const noindex = visibility === 'unlisted';
 const isPrivate = visibility === 'private';
-const defaultMode = renderedDiary.length > 0 ? 'combined' : 'plan';
+const defaultMode = status === 'complete'
+  ? 'combined'
+  : (renderedDiary.length > 0 ? 'combined' : 'plan');
 ---
 
 <BaseLayout {title} {description} {noindex}>
   <TripHero {title} {description} {cover_photo} {destinations} {date_start} {date_end} />
+  <TripNav {tripSlug} currentPage="itinerary" {status} />
   <TripStats days={daysData} />
   <ViewToggle defaultMode={defaultMode} />
   <JumpNav days={daysData} />
@@ -127,4 +131,13 @@ const defaultMode = renderedDiary.length > 0 ? 'combined' : 'plan';
     const hasNotes = panel.querySelectorAll('.note').length > 0;
     if (hasNotes) document.body.classList.add('has-notes');
   }
+
+  // Highlight current day when trip is active
+  const today = new Date().toISOString().slice(0, 10);
+  document.querySelectorAll('.day').forEach(el => {
+    if (el instanceof HTMLElement && el.dataset.date === today) {
+      el.classList.add('day--current');
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
 </script>
