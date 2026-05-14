@@ -8,6 +8,7 @@ const activitySchema = z.object({
   description: z.string().optional(),
   url: z.string().optional(),
   photo: z.string().optional(),
+  confirmation: z.string().optional(),
 });
 
 const mealSchema = z.object({
@@ -17,6 +18,7 @@ const mealSchema = z.object({
   dish: z.string().optional(),
   notes: z.string().optional(),
   url: z.string().optional(),
+  confirmation: z.string().optional(),
 });
 
 const bookingItemSchema = z.object({
@@ -29,6 +31,7 @@ const trips = defineCollection({
   schema: z.object({
     title: z.string(),
     visibility: z.enum(['public', 'unlisted', 'private']),
+    status: z.enum(['planning', 'active', 'complete']).default('planning'),
     destinations: z.array(z.string()),
     date_start: z.coerce.date(),
     date_end: z.coerce.date(),
@@ -47,6 +50,7 @@ const days = defineCollection({
     accommodation: z.object({
       name: z.string(),
       url: z.string().optional(),
+      confirmation: z.string().optional(),
     }).optional(),
     activities: z.array(activitySchema).default([]),
     meals: z.array(mealSchema).default([]),
@@ -107,4 +111,62 @@ const packing = defineCollection({
   }),
 });
 
-export const collections = { trips, days, bookings, suggestions, diary, packing };
+const preDeparture = defineCollection({
+  loader: glob({ pattern: '**/pre-departure.{yaml,yml}', base: './src/content/trips' }),
+  schema: z.object({
+    trip: z.string(),
+    flights: z.array(z.object({
+      number: z.string(),
+      route: z.string(),
+      depart: z.string(),
+      arrive: z.string(),
+      notes: z.string().optional(),
+    })).default([]),
+    jet_lag: z.object({
+      pre_departure: z.array(z.object({ day: z.string(), instructions: z.string() })).default([]),
+      return: z.array(z.object({ day: z.string(), instructions: z.string() })).default([]),
+    }).optional(),
+    checklist: z.array(z.object({
+      category: z.string(),
+      items: z.array(z.object({
+        label: z.string(),
+        private: z.boolean().default(false),
+      })),
+    })).default([]),
+    emergency_contacts: z.array(z.object({
+      name: z.string(),
+      phone: z.string(),
+      address: z.string().optional(),
+      notes: z.string().optional(),
+    })).default([]),
+    ta_q_bin: z.array(z.object({
+      from_hotel: z.string(),
+      to_hotel: z.string(),
+      drop_by: z.string(),
+      arrives: z.string(),
+    })).default([]),
+  }),
+});
+
+const highlights = defineCollection({
+  loader: glob({ pattern: '**/highlights.md', base: './src/content/trips' }),
+  schema: z.object({
+    trip: z.string(),
+    title: z.string(),
+    published: z.boolean().default(false),
+  }),
+});
+
+const recap = defineCollection({
+  loader: glob({ pattern: '**/recap.md', base: './src/content/trips' }),
+  schema: z.object({
+    trip: z.string(),
+    title: z.string(),
+    published: z.boolean().default(false),
+  }),
+});
+
+export const collections = {
+  trips, days, bookings, suggestions, diary, packing,
+  preDeparture, highlights, recap,
+};
