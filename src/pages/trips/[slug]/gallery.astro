@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TripNav from '../../../components/TripNav.astro';
+
+export async function getStaticPaths() {
+  const trips = await getCollection('trips', ({ data }) => data.visibility !== 'private');
+  return trips.map(trip => ({
+    params: { slug: trip.id.replace('/index', '') },
+    props: { trip },
+  }));
+}
+
+const { trip } = Astro.props;
+const tripSlug = trip.id.replace('/index', '');
+const { title, visibility, status } = trip.data;
+const noindex = visibility === 'unlisted';
+
+const allDiary = await getCollection('diary');
+const tripDiary = allDiary
+  .filter(e => e.id.startsWith(tripSlug + '/diary/'))
+  .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+
+const photosByDay = tripDiary
+  .filter(e => e.data.photos.length > 0)
+  .map(e => ({
+    date: e.data.date,
+    location: e.data.location,
+    title: e.data.title,
+    photos: e.data.photos,
+  }));
+
+const totalPhotos = photosByDay.reduce((sum, d) => sum + d.photos.length, 0);
+---
+
+<BaseLayout title={`Photos — ${title}`} noindex={noindex}>
+  <div class="page-header">
+    <h1 class="page-title">{title}</h1>
+    <p class="page-subtitle">Photos{totalPhotos > 0 ? ` · ${totalPhotos} images` : ''}</p>
+  </div>
+  <TripNav {tripSlug} currentPage="gallery" {status} />
+
+  <div class="gallery-content">
+    {totalPhotos === 0
+      ? <p class="empty-state">Photos will appear here as we travel.</p>
+      : photosByDay.map(day => (
+          <section class="gallery-day">
+            <h2 class="gallery-day__header">
+              <span class="label">
+                {day.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
+                {' · '}
+                {day.location}
+              </span>
+              {day.title && <span class="gallery-day__title">{day.title}</span>}
+            </h2>
+            <div class="gallery-grid">
+              {day.photos.map((url, i) => (
+                <a href={url} class="gallery-item" target="_blank" rel="noopener">
+                  <img src={url} alt={`${day.location} — photo ${i + 1}`} loading="lazy" class="gallery-img" />
+                </a>
+              ))}
+            </div>
+          </section>
+        ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header { padding: 2rem 1rem 0.5rem; max-width: 1100px; margin: 0 auto; }
+  .page-title { font-size: 1.5rem; margin-bottom: 0.2rem; }
+  .page-subtitle { color: var(--text-muted); font-family: var(--font-sans); font-size: 0.85rem; }
+  .gallery-content { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+  .gallery-day { margin-bottom: 2.5rem; }
+  .gallery-day__header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+  .gallery-day__title { font-size: 0.9rem; color: var(--text-muted); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.5rem;
+  }
+  .gallery-item { display: block; overflow: hidden; border-radius: 3px; aspect-ratio: 4/3; }
+  .gallery-img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s; }
+  .gallery-item:hover .gallery-img { opacity: 0.9; }
+  .empty-state { color: var(--text-muted); font-style: italic; padding-top: 2rem; }
+</style>
