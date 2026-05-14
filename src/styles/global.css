@@ -250,3 +250,36 @@ h3 { font-size: 1.1rem; font-weight: 600; font-family: var(--font-sans); }
   font-style: italic;
   padding: 2rem 0;
 }
+
+/* Private field visibility */
+.private-field {
+  display: none;
+}
+body.private-unlocked .private-field {
+  display: inline;
+}
+
+/* Private lock button */
+.private-lock-btn {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  background: var(--bg, #fff);
+  border: 1px solid var(--border, #ddd);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: var(--text-muted, #888);
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.private-lock-btn:hover {
+  border-color: var(--accent, #333);
+  color: var(--accent, #333);
+}
+body.private-unlocked .private-lock-btn {
+  color: var(--accent, #333);
+  border-color: var(--accent, #333);
+}

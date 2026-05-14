@@ -7,6 +7,7 @@ interface Props {
   noindex?: boolean;
 }
 const { title, description, noindex = false } = Astro.props;
+const pw = import.meta.env.PUBLIC_TRIP_PASSWORD ?? '';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +28,9 @@ const { title, description, noindex = false } = Astro.props;
   <footer class="site-footer">
     <p class="label">Andrew Greenlee</p>
   </footer>
+
+  <button class="private-lock-btn" id="private-lock-btn" aria-label="Toggle private details">🔒 Details</button>
+
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     if (window.netlifyIdentity) {
@@ -36,6 +40,43 @@ const { title, description, noindex = false } = Astro.props;
         }
       });
     }
+  </script>
+
+  <script define:vars={{ pw }}>
+    const STORAGE_KEY = 'travel-portal-pw';
+
+    function applyUnlocked() {
+      document.body.classList.add('private-unlocked');
+      const btn = document.getElementById('private-lock-btn');
+      if (btn) btn.textContent = '🔓 Details';
+    }
+
+    function applyLocked() {
+      document.body.classList.remove('private-unlocked');
+      const btn = document.getElementById('private-lock-btn');
+      if (btn) btn.textContent = '🔒 Details';
+    }
+
+    // Restore from localStorage on page load
+    if (pw && localStorage.getItem(STORAGE_KEY) === pw) {
+      applyUnlocked();
+    }
+
+    document.getElementById('private-lock-btn')?.addEventListener('click', () => {
+      if (document.body.classList.contains('private-unlocked')) {
+        localStorage.removeItem(STORAGE_KEY);
+        applyLocked();
+      } else {
+        if (!pw) return;
+        const entered = prompt('Enter password to view private details:');
+        if (entered === pw) {
+          localStorage.setItem(STORAGE_KEY, pw);
+          applyUnlocked();
+        } else if (entered !== null) {
+          alert('Incorrect password.');
+        }
+      }
+    });
   </script>
 </body>
 </html>
