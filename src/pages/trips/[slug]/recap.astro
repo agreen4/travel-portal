@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TripNav from '../../../components/TripNav.astro';
+
+export async function getStaticPaths() {
+  const trips = await getCollection('trips', ({ data }) => data.visibility !== 'private');
+  return trips.map(trip => ({
+    params: { slug: trip.id.replace('/index', '') },
+    props: { trip },
+  }));
+}
+
+const { trip } = Astro.props;
+const tripSlug = trip.id.replace('/index', '');
+const { title, visibility, status } = trip.data;
+const noindex = visibility === 'unlisted';
+
+const allRecap = await getCollection('recap');
+const recapEntry = allRecap.find(r => r.data.trip === tripSlug);
+const rendered = recapEntry ? await render(recapEntry) : null;
+---
+
+<BaseLayout title={`Recap — ${title}`} noindex={noindex}>
+  <div class="page-header">
+    <h1 class="page-title">{title}</h1>
+    <p class="page-subtitle">Trip Recap</p>
+  </div>
+  <TripNav {tripSlug} currentPage="recap" {status} />
+
+  <div class="recap-content">
+    {status !== 'complete'
+      ? <p class="empty-state">Recap will be posted after we return.</p>
+      : rendered
+        ? <rendered.Content />
+        : <p class="empty-state">Coming soon.</p>
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header { padding: 2rem 1rem 0.5rem; max-width: 800px; margin: 0 auto; }
+  .page-title { font-size: 1.5rem; margin-bottom: 0.2rem; }
+  .page-subtitle { color: var(--text-muted); font-family: var(--font-sans); font-size: 0.85rem; }
+  .recap-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 4rem;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+  .recap-content :global(h2) { font-size: 1.2rem; margin-top: 2rem; }
+  .recap-content :global(img) { max-width: 100%; border-radius: 4px; margin: 1rem 0; }
+  .empty-state { color: var(--text-muted); font-style: italic; padding-top: 2rem; }
+</style>
