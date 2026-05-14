@@ -7,8 +7,9 @@ interface Props {
   description?: string;
   url?: string;
   photo?: string;
+  confirmation?: string;
 }
-const { id, time, name, description, url, photo } = Astro.props;
+const { id, time, name, description, url, photo, confirmation } = Astro.props;
 ---
 
 <div class="activity" data-activity-id={id}>
@@ -19,6 +20,11 @@ const { id, time, name, description, url, photo } = Astro.props;
       : <p class="activity__name">{name}</p>
     }
     {description && <p class="activity__desc">{description}</p>}
+    {confirmation && (
+      <p class="activity__confirmation private-field">
+        <span class="label">Confirmation:</span> {confirmation}
+      </p>
+    )}
     {photo && <img src={photo} alt={name} class="activity__photo" loading="lazy" />}
     <button class="suggest-trigger label" data-for={id} aria-label={`Add note about ${name}`}>+ note</button>
   </div>
@@ -30,6 +36,7 @@ const { id, time, name, description, url, photo } = Astro.props;
   .activity__content { flex: 1; }
   .activity__name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.2rem; display: block; }
   .activity__desc { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+  .activity__confirmation { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.4rem; font-family: var(--font-sans); }
   .activity__photo { border-radius: 3px; margin-top: 0.5rem; max-height: 200px; object-fit: cover; }
   .suggest-trigger {
     display: none;

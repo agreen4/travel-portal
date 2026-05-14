@@ -7,8 +7,9 @@ interface Props {
   dish?: string;
   notes?: string;
   url?: string;
+  confirmation?: string;
 }
-const { id, time, restaurant, dish, notes, url } = Astro.props;
+const { id, time, restaurant, dish, notes, url, confirmation } = Astro.props;
 ---
 
 <div class="meal" data-activity-id={id}>
@@ -22,6 +23,11 @@ const { id, time, restaurant, dish, notes, url } = Astro.props;
       }
       {dish && <p class="meal__dish">{dish}</p>}
       {notes && <p class="meal__notes">{notes}</p>}
+      {confirmation && (
+        <p class="meal__confirmation private-field">
+          <span class="label">Confirmation:</span> {confirmation}
+        </p>
+      )}
       <button class="suggest-trigger label" data-for={id} aria-label={`Add note about ${restaurant}`}>+ note</button>
     </div>
   </div>
@@ -35,6 +41,7 @@ const { id, time, restaurant, dish, notes, url } = Astro.props;
   .meal__name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.15rem; display: block; }
   .meal__dish { font-style: italic; font-size: 0.875rem; margin-bottom: 0.15rem; color: var(--text-muted); }
   .meal__notes { font-size: 0.85rem; color: var(--text-muted); }
+  .meal__confirmation { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem; font-family: var(--font-sans); }
   .suggest-trigger {
     display: none;
     margin-top: 0.4rem;
