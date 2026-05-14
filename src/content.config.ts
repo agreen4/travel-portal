@@ -124,7 +124,7 @@ const preDeparture = defineCollection({
     })).default([]),
     jet_lag: z.object({
       pre_departure: z.array(z.object({ day: z.string(), instructions: z.string() })).default([]),
-      return: z.array(z.object({ day: z.string(), instructions: z.string() })).default([]),
+      on_return: z.array(z.object({ day: z.string(), instructions: z.string() })).default([]),
     }).optional(),
     checklist: z.array(z.object({
       category: z.string(),
