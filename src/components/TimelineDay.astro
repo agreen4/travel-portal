@@ -4,9 +4,9 @@ import { formatDay } from '../utils/format-date';
 import ActivityBlock from './ActivityBlock.astro';
 import MealBlock from './MealBlock.astro';
 
-interface Activity { id: string; time?: string; name: string; description?: string; url?: string; photo?: string; }
-interface Meal { id: string; time?: string; restaurant: string; dish?: string; notes?: string; url?: string; }
-interface Accommodation { name: string; url?: string; }
+interface Activity { id: string; time?: string; name: string; description?: string; url?: string; photo?: string; confirmation?: string; }
+interface Meal { id: string; time?: string; restaurant: string; dish?: string; notes?: string; url?: string; confirmation?: string; }
+interface Accommodation { name: string; url?: string; confirmation?: string; }
 interface Day {
   date: Date;
   location: string;
@@ -44,7 +44,7 @@ const items = [
 ].sort((a, b) => parseTime(a.time) - parseTime(b.time));
 ---
 
-<div class="day" id={locationId}>
+<div class="day" id={locationId} data-date={day.date.toISOString().slice(0, 10)}>
   <div class="day__node">
     <div class="day__dot"></div>
   </div>
@@ -64,6 +64,9 @@ const items = [
           ? <a href={day.accommodation.url} target="_blank" rel="noopener">{day.accommodation.name}</a>
           : <span>{day.accommodation.name}</span>
         }
+        {day.accommodation.confirmation && (
+          <span class="accommodation__confirmation private-field"> · Conf: {day.accommodation.confirmation}</span>
+        )}
       </div>
     )}
 
@@ -109,6 +112,7 @@ const items = [
     margin-bottom: 1rem;
     color: var(--text-muted);
   }
+  .accommodation__confirmation { font-size: 0.75rem; }
   .day__diary {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
