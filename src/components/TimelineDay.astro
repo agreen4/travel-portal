@@ -89,6 +89,7 @@ const items = [
     gap: 1rem;
     margin-bottom: 3rem;
     position: relative;
+    scroll-margin-top: 90px;
   }
   .day__node { display: flex; flex-direction: column; align-items: center; }
   .day__dot {
@@ -122,4 +123,10 @@ const items = [
     color: var(--text);
   }
   .day__diary:empty { display: none; }
+  .day--current .day__dot {
+    width: 14px;
+    height: 14px;
+    margin-top: 4px;
+    box-shadow: 0 0 0 3px var(--accent);
+  }
 </style>

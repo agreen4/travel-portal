@@ -12,6 +12,7 @@
   --font-sans: system-ui, -apple-system, sans-serif;
   --max-width: 860px;
   --side-panel-width: 280px;
+  --trip-nav-height: 44px;
 }
 
 html { font-size: 100%; }

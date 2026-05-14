@@ -10,20 +10,30 @@ const base = `/trips/${tripSlug}`;
 ---
 
 <nav class="trip-nav" aria-label="Trip sections">
-  <a href={base} class:list={['trip-nav__link', { 'trip-nav__link--active': currentPage === 'itinerary' }]}>
+  <a href={base}
+     class:list={['trip-nav__link', { 'trip-nav__link--active': currentPage === 'itinerary' }]}
+     aria-current={currentPage === 'itinerary' ? 'page' : undefined}>
     Itinerary
   </a>
-  <a href={`${base}/pre-departure`} class:list={['trip-nav__link', { 'trip-nav__link--active': currentPage === 'pre-departure' }]}>
+  <a href={`${base}/pre-departure`}
+     class:list={['trip-nav__link', { 'trip-nav__link--active': currentPage === 'pre-departure' }]}
+     aria-current={currentPage === 'pre-departure' ? 'page' : undefined}>
     Pre-Departure
   </a>
-  <a href={`${base}/highlights`} class:list={['trip-nav__link', { 'trip-nav__link--active': currentPage === 'highlights' }]}>
+  <a href={`${base}/highlights`}
+     class:list={['trip-nav__link', { 'trip-nav__link--active': currentPage === 'highlights' }]}
+     aria-current={currentPage === 'highlights' ? 'page' : undefined}>
     Highlights
   </a>
-  <a href={`${base}/gallery`} class:list={['trip-nav__link', { 'trip-nav__link--active': currentPage === 'gallery' }]}>
+  <a href={`${base}/gallery`}
+     class:list={['trip-nav__link', { 'trip-nav__link--active': currentPage === 'gallery' }]}
+     aria-current={currentPage === 'gallery' ? 'page' : undefined}>
     Photos
   </a>
   {status === 'complete' && (
-    <a href={`${base}/recap`} class:list={['trip-nav__link', 'trip-nav__link--featured', { 'trip-nav__link--active': currentPage === 'recap' }]}>
+    <a href={`${base}/recap`}
+       class:list={['trip-nav__link', 'trip-nav__link--featured', { 'trip-nav__link--active': currentPage === 'recap' }]}
+       aria-current={currentPage === 'recap' ? 'page' : undefined}>
       Recap
     </a>
   )}
@@ -68,5 +78,9 @@ const base = `/trips/${tripSlug}`;
   .trip-nav__link--featured:hover {
     opacity: 0.85;
     color: var(--bg);
+  }
+  .trip-nav__link--featured.trip-nav__link--active {
+    color: var(--bg);
+    font-weight: 600;
   }
 </style>
