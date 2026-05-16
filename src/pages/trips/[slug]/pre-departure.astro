@@ -59,7 +59,9 @@ for (let i = 0; i < tripDays.length; i++) {
   </div>
   <TripNav {tripSlug} currentPage="pre-departure" {status} />
 
-  <div class="pre-dep-content">
+  <p class="locked-notice">🔒 This page is private — click the Details button to unlock.</p>
+
+  <div class="pre-dep-content private-field">
 
     {/* Flights */}
     {preDep && preDep.data.flights.length > 0 && (
@@ -222,7 +224,10 @@ for (let i = 0; i < tripDays.length; i++) {
   .page-header { padding: 2rem 1rem 0.5rem; max-width: 800px; margin: 0 auto; }
   .page-title { font-size: 1.5rem; margin-bottom: 0.2rem; }
   .page-subtitle { color: var(--text-muted); font-family: var(--font-sans); font-size: 0.85rem; }
+  .locked-notice { max-width: 800px; margin: 2rem auto 0; padding: 0 1rem; color: var(--text-muted); font-family: var(--font-sans); font-size: 0.875rem; }
+  body.private-unlocked .locked-notice { display: none; }
   .pre-dep-content { max-width: 800px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+  body.private-unlocked .pre-dep-content { display: block; }
   .pre-dep-section { margin-bottom: 2.5rem; }
   .pre-dep-section h2 { font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; margin-bottom: 1rem; }
   .pre-dep-section h3 { font-size: 0.9rem; color: var(--text-muted); margin: 1rem 0 0.5rem; font-family: var(--font-sans); }
