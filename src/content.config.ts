@@ -9,6 +9,7 @@ const activitySchema = z.object({
   url: z.string().optional(),
   photo: z.string().optional(),
   confirmation: z.string().optional(),
+  private_note: z.string().optional(),
 });
 
 const mealSchema = z.object({
@@ -51,6 +52,7 @@ const days = defineCollection({
       name: z.string(),
       url: z.string().optional(),
       confirmation: z.string().optional(),
+      room_type: z.string().optional(),
     }).optional(),
     activities: z.array(activitySchema).default([]),
     meals: z.array(mealSchema).default([]),

@@ -6,7 +6,7 @@ import MealBlock from './MealBlock.astro';
 
 interface Activity { id: string; time?: string; name: string; description?: string; url?: string; photo?: string; confirmation?: string; }
 interface Meal { id: string; time?: string; restaurant: string; dish?: string; notes?: string; url?: string; confirmation?: string; }
-interface Accommodation { name: string; url?: string; confirmation?: string; }
+interface Accommodation { name: string; url?: string; confirmation?: string; room_type?: string; }
 interface Day {
   date: Date;
   location: string;
@@ -64,6 +64,9 @@ const items = [
           ? <a href={day.accommodation.url} target="_blank" rel="noopener">{day.accommodation.name}</a>
           : <span>{day.accommodation.name}</span>
         }
+        {day.accommodation.room_type && (
+          <span class="accommodation__room-type private-field"> · {day.accommodation.room_type}</span>
+        )}
         {day.accommodation.confirmation && (
           <span class="accommodation__confirmation private-field"> · Conf: {day.accommodation.confirmation}</span>
         )}
@@ -114,6 +117,7 @@ const items = [
     color: var(--text-muted);
   }
   .accommodation__confirmation { font-size: 0.75rem; }
+  .accommodation__room-type { font-size: 0.75rem; }
   .day__diary {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
