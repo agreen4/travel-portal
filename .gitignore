@@ -6,3 +6,6 @@ dist/
 !.env.example
 .superpowers/
 .worktrees/
+
+# Claude Code project instructions — local only, never published
+CLAUDE.md
