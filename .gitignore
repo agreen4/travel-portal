@@ -7,5 +7,8 @@ dist/
 .superpowers/
 .worktrees/
 
+# macOS
+.DS_Store
+
 # Claude Code project instructions — local only, never published
 CLAUDE.md
